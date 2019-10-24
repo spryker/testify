@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Spryker\Glue\Testify\OpenApi3\Object;
+namespace Spryker\Glue\Testify\OpenApi3\SchemaObject;
 
 use Spryker\Glue\Testify\OpenApi3\Collection\Callbacks;
 use Spryker\Glue\Testify\OpenApi3\Collection\Examples;
@@ -19,14 +19,14 @@ use Spryker\Glue\Testify\OpenApi3\Collection\SecuritySchemes;
 use Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition;
 
 /**
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Schema[] $schemas
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Response[] $responses
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Parameter[] $parameters
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Example[] $examples
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\RequestBody[] $requestBodies
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Header[] $headers
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\SecurityScheme[] $securitySchemes
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Link[] $links
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Schema[] $schemas
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Response[] $responses
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Parameter[] $parameters
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Example[] $examples
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\RequestBody[] $requestBodies
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Header[] $headers
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\SecurityScheme[] $securitySchemes
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Link[] $links
  * @property-read \Spryker\Glue\Testify\OpenApi3\Collection\Callback[] $callbacks
  */
 class Components extends AbstractObject

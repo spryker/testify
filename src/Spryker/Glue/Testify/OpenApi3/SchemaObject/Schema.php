@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Spryker\Glue\Testify\OpenApi3\Object;
+namespace Spryker\Glue\Testify\OpenApi3\SchemaObject;
 
 use Spryker\Glue\Testify\OpenApi3\Collection\Schemas;
 use Spryker\Glue\Testify\OpenApi3\Primitive\Any;
@@ -47,11 +47,11 @@ use Spryker\Glue\Testify\OpenApi3\Reference\ReferableInterface;
  * @property-read string $format
  * @property-read mixed $default
  * @property-read bool $nullable
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Discriminator $discriminator
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Discriminator $discriminator
  * @property-read bool $readOnly
  * @property-read bool $writeOnly
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Xml $xml
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\ExternalDocumentation $externalDocs
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Xml $xml
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\ExternalDocumentation $externalDocs
  * @property-read mixed $example
  * @property-read bool $deprecated
  */
