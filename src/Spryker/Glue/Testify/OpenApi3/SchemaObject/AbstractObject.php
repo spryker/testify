@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Spryker\Glue\Testify\OpenApi3\Object;
+namespace Spryker\Glue\Testify\OpenApi3\SchemaObject;
 
 use Spryker\Glue\Testify\OpenApi3\Property\PropertyValueInterface;
 use Spryker\Glue\Testify\OpenApi3\Property\PropertyValues;
