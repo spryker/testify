@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Spryker\Glue\Testify\OpenApi3\Object;
+namespace Spryker\Glue\Testify\OpenApi3\SchemaObject;
 
 use Spryker\Glue\Testify\OpenApi3\Collection\Encodings;
 use Spryker\Glue\Testify\OpenApi3\Collection\Examples;
@@ -13,10 +13,10 @@ use Spryker\Glue\Testify\OpenApi3\Primitive\Any;
 use Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition;
 
 /**
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Schema $schema
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Schema $schema
  * @property-read mixed $example
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Example[] $examples
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Encoding[] $encoding
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Example[] $examples
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Encoding[] $encoding
  */
 class MediaType extends AbstractObject
 {

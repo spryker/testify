@@ -5,14 +5,14 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Spryker\Glue\Testify\OpenApi3\Object;
+namespace Spryker\Glue\Testify\OpenApi3\SchemaObject;
 
 use Spryker\Glue\Testify\OpenApi3\SchemaFieldInterface;
 
 interface ObjectInterface extends SchemaFieldInterface
 {
     /**
-     * @return \Spryker\Glue\Testify\OpenApi3\Object\ObjectSpecification
+     * @return \Spryker\Glue\Testify\OpenApi3\SchemaObject\ObjectSpecification
      */
     public function getObjectSpecification(): ObjectSpecification;
 

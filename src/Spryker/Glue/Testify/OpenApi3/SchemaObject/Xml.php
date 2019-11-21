@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Spryker\Glue\Testify\OpenApi3\Object;
+namespace Spryker\Glue\Testify\OpenApi3\SchemaObject;
 
 use Spryker\Glue\Testify\OpenApi3\Primitive\StringPrimitive;
 use Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition;
@@ -15,7 +15,7 @@ use Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition;
  * @property-read string $url
  * @property-read string $email
  */
-class Contact extends AbstractObject
+class Xml extends AbstractObject
 {
     /**
      * @inheritDoc

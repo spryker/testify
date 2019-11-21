@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Spryker\Glue\Testify\OpenApi3\Object;
+namespace Spryker\Glue\Testify\OpenApi3\SchemaObject;
 
 use Spryker\Glue\Testify\OpenApi3\Collection\Paths;
 use Spryker\Glue\Testify\OpenApi3\Collection\SecurityRequirements;
@@ -16,13 +16,13 @@ use Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition;
 
 /**
  * @property-read string $openapi
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Info $info
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Server[] $servers
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\PathItem[] $paths
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Components $components
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Info $info
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Server[] $servers
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\PathItem[] $paths
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Components $components
  * @property-read \Spryker\Glue\Testify\OpenApi3\Collection\SecurityRequirement[] $security
  * @property-read string[] $tags
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\ExternalDocumentation $externalDocs
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\ExternalDocumentation $externalDocs
  */
 class OpenApi extends AbstractObject
 {

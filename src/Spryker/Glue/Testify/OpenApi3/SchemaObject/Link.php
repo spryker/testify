@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Spryker\Glue\Testify\OpenApi3\Object;
+namespace Spryker\Glue\Testify\OpenApi3\SchemaObject;
 
 use Spryker\Glue\Testify\OpenApi3\Primitive\Any;
 use Spryker\Glue\Testify\OpenApi3\Primitive\StringPrimitive;
@@ -18,7 +18,7 @@ use Spryker\Glue\Testify\OpenApi3\Reference\ReferableInterface;
  * @property-read array $parameters
  * @property-read mixed $requestBody
  * @property-read string $description
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Server $server
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Server $server
  */
 class Link extends AbstractObject implements ReferableInterface
 {
