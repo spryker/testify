@@ -5,15 +5,15 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Spryker\Glue\Testify\OpenApi3\Object;
+namespace Spryker\Glue\Testify\OpenApi3\SchemaObject;
 
 use Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition;
 
 /**
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\OAuthFlow $implicit
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\OAuthFlow $password
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\OAuthFlow $clientCredentials
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\OAuthFlow $authorizationCode
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\OAuthFlow $implicit
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\OAuthFlow $password
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\OAuthFlow $clientCredentials
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\OAuthFlow $authorizationCode
  */
 class OAuthFlows extends AbstractObject
 {

@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Spryker\Glue\Testify\OpenApi3\Object;
+namespace Spryker\Glue\Testify\OpenApi3\SchemaObject;
 
 use Spryker\Glue\Testify\OpenApi3\Collection\Parameters;
 use Spryker\Glue\Testify\OpenApi3\Collection\Servers;
@@ -16,18 +16,18 @@ use Spryker\Glue\Testify\OpenApi3\Reference\ReferableInterface;
 /**
  * @property-read string $summary
  * @property-read string $description
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Operation $get
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Operation $put
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Operation $post
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Operation $delete
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Operation $options
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Operation $head
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Operation $patch
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Operation $trace
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Server[] $servers
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\Parameter[] $parameters
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Operation $get
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Operation $put
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Operation $post
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Operation $delete
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Operation $options
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Operation $head
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Operation $patch
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Operation $trace
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Server[] $servers
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\Parameter[] $parameters
  *
- * @property-read \Spryker\Glue\Testify\OpenApi3\Object\License $license
+ * @property-read \Spryker\Glue\Testify\OpenApi3\SchemaObject\License $license
  * @property-read string $version
  */
 class PathItem extends AbstractObject implements ReferableInterface
