@@ -612,4 +612,18 @@ class GlueRest extends REST implements LastConnectionProviderInterface
 
         return $this->jsonPathModule;
     }
+
+    /**
+     * @param $name
+     * @param $value
+     * @param false $overwrite
+     *
+     * Overwrite Methode to only set the Header if it was not set manually / upfront.
+     */
+    public function haveHttpHeader($name, $value, $overwrite = false)
+    {
+        if($overwrite || !isset($this->connectionModule->headers[$name])){
+            parent::haveHttpHeader($name, $value);
+        }
+    }
 }
