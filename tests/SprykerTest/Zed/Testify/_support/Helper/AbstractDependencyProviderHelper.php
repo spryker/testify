@@ -167,7 +167,9 @@ abstract class AbstractDependencyProviderHelper extends Module
 
         $classNameCandidate = sprintf(static::DEPENDENCY_PROVIDER_CLASS_NAME_PATTERN, 'Spryker', $moduleName);
 
-        if (in_array($namespacePrefix, static::NON_STANDARD_NAMESPACE_PREFIXES, true) && class_exists($classNameCandidate)) {
+        if (in_array($namespacePrefix, static::NON_STANDARD_NAMESPACE_PREFIXES, true) && class_exists($classNameCandidate)
+            || $classNameCandidate === '\Spryker\Zed\Propel\PropelDependencyProvider'
+        ) {
             return $classNameCandidate;
         }
 
