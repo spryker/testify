@@ -581,12 +581,12 @@ class GlueRest extends REST implements LastConnectionProviderInterface
     /**
      * @param string $method
      * @param string $url
-     * @param array $parameters
+     * @param array|string|object $parameters
      * @param array $files
      *
      * @return static
      */
-    protected function persistLastConnection(string $method, string $url, array $parameters, array $files): self
+    protected function persistLastConnection(string $method, string $url, $parameters, array $files): self
     {
         $responseBody = $this->grabResponse();
         $jsonResponse = json_decode($responseBody, true);

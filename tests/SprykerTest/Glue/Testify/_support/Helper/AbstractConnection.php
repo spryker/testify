@@ -93,11 +93,11 @@ abstract class AbstractConnection implements Connection
     }
 
     /**
-     * @param array<string, mixed> $requestParameters
+     * @param array<string, mixed>|string|object $requestParameters
      *
      * @return static
      */
-    public function setRequestParameters(array $requestParameters): self
+    public function setRequestParameters($requestParameters): self
     {
         $this->requestParameters = $requestParameters;
 

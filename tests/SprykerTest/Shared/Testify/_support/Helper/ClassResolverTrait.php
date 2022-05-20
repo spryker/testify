@@ -44,12 +44,13 @@ trait ClassResolverTrait
     /**
      * @param string $classNamePattern
      * @param string $moduleName
+     * @param string|null $layerName
      *
      * @return string|null
      */
-    protected function resolveClassName(string $classNamePattern, string $moduleName): ?string
+    protected function resolveClassName(string $classNamePattern, string $moduleName, ?string $layerName = null): ?string
     {
-        $classNameCandidates = $this->getClassNameCandidates($classNamePattern, $moduleName);
+        $classNameCandidates = $this->getClassNameCandidates($classNamePattern, $moduleName, $layerName);
 
         foreach ($classNameCandidates as $classNameCandidate) {
             if (class_exists($classNameCandidate)) {
@@ -63,15 +64,17 @@ trait ClassResolverTrait
     /**
      * @param string $classNamePattern
      * @param string $moduleName
+     * @param string|null $layerName
      *
      * @return array<string>
      */
-    protected function getClassNameCandidates(string $classNamePattern, string $moduleName): array
+    protected function getClassNameCandidates(string $classNamePattern, string $moduleName, ?string $layerName = null): array
     {
         $config = Configuration::config();
         $namespaceParts = explode('\\', $config['namespace']);
         $classNameCandidates = [];
-        $classNameCandidates[] = sprintf($classNamePattern, $this->trimTestNamespacePostfix($namespaceParts[0]), $namespaceParts[1], $moduleName);
+        $layer = $layerName ?? $namespaceParts[1];
+        $classNameCandidates[] = sprintf($classNamePattern, $this->trimTestNamespacePostfix($namespaceParts[0]), $layer, $moduleName);
 
         foreach ($this->coreNamespaces as $coreNamespace) {
             $classNameCandidates[] = sprintf($classNamePattern, $coreNamespace, $namespaceParts[1], $moduleName);
