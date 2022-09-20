@@ -7,7 +7,6 @@
 
 namespace SprykerTest\Zed\Testify\Helper\Business;
 
-use Codeception\Configuration;
 use Codeception\Stub;
 use Codeception\TestInterface;
 use Exception;
@@ -22,6 +21,7 @@ use SprykerTest\Shared\Testify\Helper\AbstractHelper;
 use SprykerTest\Shared\Testify\Helper\ClassResolverTrait;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 use SprykerTest\Shared\Testify\Helper\ConfigHelperTrait;
+use SprykerTest\Shared\Testify\Helper\ModuleNameTrait;
 use Throwable;
 
 class BusinessHelper extends AbstractHelper
@@ -29,6 +29,7 @@ class BusinessHelper extends AbstractHelper
     use ConfigHelperTrait;
     use ClassResolverTrait;
     use DependencyProviderHelperTrait;
+    use ModuleNameTrait;
 
     /**
      * @var string
@@ -149,23 +150,6 @@ class BusinessHelper extends AbstractHelper
         $facade->setFactory($this->getFactory($moduleName));
 
         return $facade;
-    }
-
-    /**
-     * @param string|null $moduleName
-     *
-     * @return string
-     */
-    protected function getModuleName(?string $moduleName = null): string
-    {
-        if ($moduleName) {
-            return $moduleName;
-        }
-
-        $config = Configuration::config();
-        $namespaceParts = explode('\\', $config['namespace']);
-
-        return $namespaceParts[2];
     }
 
     /**
