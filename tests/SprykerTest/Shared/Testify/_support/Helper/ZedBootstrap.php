@@ -43,7 +43,7 @@ class ZedBootstrap extends Framework implements DependsOnModule
     /**
      * @var array<string, array>
      */
-    protected $config = [
+    protected array $config = [
         self::CONFIG_KEY_SERVICE_PROVIDER => [],
         self::CONFIG_KEY_APPLICATION_PLUGINS => [],
     ];

@@ -27,7 +27,7 @@ class LocatorHelper extends Module
     /**
      * @var array
      */
-    protected $config = [
+    protected array $config = [
         'projectNamespaces' => [],
         'coreNamespaces' => [
             'SprykerShop',

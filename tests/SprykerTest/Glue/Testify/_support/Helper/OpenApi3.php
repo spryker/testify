@@ -30,7 +30,7 @@ class OpenApi3 extends Module
     /**
      * @var array
      */
-    protected $config = [
+    protected array $config = [
         'schema' => '',
     ];
 

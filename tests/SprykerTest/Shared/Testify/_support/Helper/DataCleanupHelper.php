@@ -21,7 +21,7 @@ class DataCleanupHelper extends Module
     /**
      * @var array
      */
-    protected $config = ['cleanup' => true];
+    protected array $config = ['cleanup' => true];
 
     /**
      * @param \Closure $closure

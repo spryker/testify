@@ -28,7 +28,7 @@ class Environment extends Module
     /**
      * @var array
      */
-    protected $config = [
+    protected array $config = [
         self::CONFIG_IS_ISOLATED_MODULE_TEST => false,
     ];
 
