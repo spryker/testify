@@ -134,7 +134,7 @@ class ZedBootstrap extends Framework implements DependsOnModule
         $twigBundleConfigMock = Stub::make(TwigConfig::class, [
             'getTemplatePaths' => function () use ($twigConfig) {
                 $paths = $twigConfig->getTemplatePaths();
-                $paths[] = APPLICATION_VENDOR_DIR . '/spryker/spryker/Bundles/%2$s/src/*/Zed/%1$s/Presentation';
+                $paths[] = APPLICATION_ROOT_DIR . '/src/Spryker/%2$s/src/*/Zed/%1$s/Presentation';
 
                 return $paths;
             },
