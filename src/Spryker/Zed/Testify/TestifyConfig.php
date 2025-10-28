@@ -21,11 +21,11 @@ class TestifyConfig extends AbstractBundleConfig
         $directories = [
             APPLICATION_ROOT_DIR . '/tests/_output/',
             APPLICATION_ROOT_DIR . '/tests/PyzTest/*/*/_output/',
-            APPLICATION_VENDOR_DIR . '/spryker/spryker/Bundles/*/tests/_output/',
-            APPLICATION_VENDOR_DIR . '/spryker/spryker/Bundles/*/tests/SprykerTest/*/*/_output/',
-            APPLICATION_VENDOR_DIR . '/spryker/spryker/Features/*/tests/_output/',
-            APPLICATION_VENDOR_DIR . '/spryker/spryker/Features/*/tests/SprykerTest/*/*/_output/',
-            APPLICATION_VENDOR_DIR . '/spryker/spryker-shop/Bundles/*/tests/SprykerTest/*/*/_output/',
+            rtrim(APPLICATION_SOURCE_DIR, '/') . '/Spryker/*/tests/_output/',
+            rtrim(APPLICATION_SOURCE_DIR, '/') . '/Spryker/*/tests/SprykerTest/*/*/_output/',
+            rtrim(APPLICATION_SOURCE_DIR, '/') . '/SprykerFeature/*/tests/_output/',
+            rtrim(APPLICATION_SOURCE_DIR, '/') . '/SprykerFeature/*/tests/SprykerTest/*/*/_output/',
+            rtrim(APPLICATION_SOURCE_DIR, '/') . '/SprykerShop/*/tests/SprykerTest/*/*/_output/',
         ];
 
         $directories = array_filter($directories, 'glob');
