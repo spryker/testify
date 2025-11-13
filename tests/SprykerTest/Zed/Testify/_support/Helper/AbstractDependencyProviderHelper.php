@@ -88,6 +88,7 @@ abstract class AbstractDependencyProviderHelper extends Module
     public function getModuleContainer(?string $moduleName = null): Container
     {
         $container = new Container();
+
         if ($this->dependencyProviderStub !== null) {
             return $this->dependencyProviderStub->provideCommunicationLayerDependencies($container);
         }
