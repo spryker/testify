@@ -48,8 +48,8 @@ class Environment extends Module
 
         $rootDirectory = $this->getRootDirectory();
         defined('APPLICATION_ROOT_DIR') || define('APPLICATION_ROOT_DIR', rtrim($rootDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
-        defined('APPLICATION_SOURCE_DIR') || define('APPLICATION_SOURCE_DIR', APPLICATION_ROOT_DIR . 'src/');
-        defined('APPLICATION_VENDOR_DIR') || define('APPLICATION_VENDOR_DIR', APPLICATION_ROOT_DIR . 'vendor/');
+        defined('APPLICATION_SOURCE_DIR') || define('APPLICATION_SOURCE_DIR', rtrim($rootDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'src/');
+        defined('APPLICATION_VENDOR_DIR') || define('APPLICATION_VENDOR_DIR', rtrim($rootDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'vendor/');
 
         $this->defineStore();
 
