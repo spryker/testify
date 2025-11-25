@@ -13,6 +13,7 @@ use Codeception\TestInterface;
 use Codeception\Util\HttpCode;
 use InvalidArgumentException;
 use PHPUnit\Framework\Assert;
+use Spryker\Glue\EventDispatcher\Plugin\GlueBackendApiApplication\EventDispatcherApplicationPlugin;
 use Spryker\Glue\GlueApplication\Bootstrap\GlueBootstrap;
 use Spryker\Glue\GlueApplication\GlueApplicationDependencyProvider;
 use Spryker\Glue\GlueApplication\GlueApplicationFactory;
@@ -25,6 +26,8 @@ use Spryker\Glue\GlueBackendApiApplication\Plugin\GlueApplication\LocaleRequestB
 use Spryker\Glue\GlueBackendApiApplication\Plugin\GlueApplication\ResourcesProviderPlugin as BackendResourcesProviderPlugin;
 use Spryker\Glue\GlueJsonApiConvention\Plugin\GlueApplication\JsonApiConventionPlugin;
 use Spryker\Glue\GlueJsonApiConventionExtension\Dependency\Plugin\JsonApiResourceInterface;
+use Spryker\Glue\Http\Plugin\Application\HttpApplicationPlugin;
+use Spryker\Glue\Router\Plugin\Application\RouterApplicationPlugin;
 use Spryker\Shared\Application\ApplicationInterface;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
 use SprykerTest\Glue\Testify\Helper\Stub\HttpSenderStub;
@@ -267,9 +270,23 @@ class GlueBackendApiHelper extends Module implements LastConnectionProviderInter
             new JsonApiConventionPlugin(),
         ], get_class($glueApplicationFactory));
 
+        $this->getDependencyProviderHelper()->setDependency(GlueApplicationDependencyProvider::PLUGINS_CONVENTION, [
+            new JsonApiConventionPlugin(),
+        ], get_class($glueApplicationFactory));
+
         $this->getDependencyProviderHelper()->setDependency(GlueApplicationDependencyProvider::PLUGINS_CONTROLLER_CACHE_COLLECTOR, [
             new BackendControllerCacheCollectorPlugin(),
         ], get_class($glueApplicationFactory));
+
+        $this->getDependencyProviderHelper()->setDependency(
+            GlueBackendApiApplicationDependencyProvider::PLUGINS_APPLICATION,
+            [
+                new HttpApplicationPlugin(),
+                new EventDispatcherApplicationPlugin(),
+                new RouterApplicationPlugin(),
+            ],
+            GlueBackendApiApplicationFactory::class,
+        );
 
         $this->getDependencyProviderHelper()->setDependency(
             GlueBackendApiApplicationDependencyProvider::PLUGINS_RESOURCE,
