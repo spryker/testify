@@ -32,7 +32,8 @@
         "spryker/router": "*",
         "spryker/silex": "*",
         "spryker/twig": "^3.0.0",
-        "symfony/dom-crawler": "*"
+        "symfony/dom-crawler": "*",
+        "symfony/framework-bundle": "*"
     },
     "suggest": {
         "spryker/silex": "Add this when you still want to use the abandoned Silex."
