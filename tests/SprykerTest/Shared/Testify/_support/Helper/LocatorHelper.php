@@ -79,11 +79,11 @@ class LocatorHelper extends Module
             'instance' => $classInstance,
             'className' => get_class($classInstance),
         ];
-        $bundleProxyInstanceCachePropertyReflection->setValue($instanceCache);
+        $bundleProxyInstanceCachePropertyReflection->setValue(null, $instanceCache);
 
         $bundleProxyIsInstanceCacheEnabledPropertyReflection = new ReflectionProperty(BundleProxy::class, 'isInstanceCacheEnabled');
         $bundleProxyIsInstanceCacheEnabledPropertyReflection->setAccessible(true);
-        $bundleProxyIsInstanceCacheEnabledPropertyReflection->setValue(true);
+        $bundleProxyIsInstanceCacheEnabledPropertyReflection->setValue(null, true);
     }
 
     /**
@@ -109,7 +109,7 @@ class LocatorHelper extends Module
         $configProperty = $this->getConfigReflectionProperty();
         $config = $configProperty->getValue();
         $config[$key] = $value;
-        $configProperty->setValue($config);
+        $configProperty->setValue(null, $config);
     }
 
     /**
@@ -154,7 +154,7 @@ class LocatorHelper extends Module
         $reflection = new ReflectionClass(AbstractLocatorLocator::class);
         $instanceProperty = $reflection->getProperty('instance');
         $instanceProperty->setAccessible(true);
-        $instanceProperty->setValue(null);
+        $instanceProperty->setValue(null, null);
     }
 
     /**
@@ -165,7 +165,7 @@ class LocatorHelper extends Module
         $reflection = new ReflectionClass(BundleDependencyProviderResolverAwareTrait::class);
         $instanceProperty = $reflection->getProperty('containers');
         $instanceProperty->setAccessible(true);
-        $instanceProperty->setValue(null);
+        $instanceProperty->setValue(null, null);
     }
 
     /**
@@ -178,7 +178,7 @@ class LocatorHelper extends Module
         if ($abstractClassResolverReflection->hasProperty('cache')) {
             $instanceProperty = $abstractClassResolverReflection->getProperty('cache');
             $instanceProperty->setAccessible(true);
-            $instanceProperty->setValue([]);
+            $instanceProperty->setValue(null, []);
         }
 
         $bundleProxyReflection = new ReflectionClass(BundleProxy::class);
@@ -186,7 +186,7 @@ class LocatorHelper extends Module
         if ($bundleProxyReflection->hasProperty('instanceCache')) {
             $instanceProperty = $bundleProxyReflection->getProperty('instanceCache');
             $instanceProperty->setAccessible(true);
-            $instanceProperty->setValue([]);
+            $instanceProperty->setValue(null, []);
         }
     }
 
@@ -239,6 +239,6 @@ class LocatorHelper extends Module
     private function resetConfig(): void
     {
         $reflectionProperty = $this->getConfigReflectionProperty();
-        $reflectionProperty->setValue(new ArrayObject($this->configCache));
+        $reflectionProperty->setValue(null, new ArrayObject($this->configCache));
     }
 }

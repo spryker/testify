@@ -51,7 +51,7 @@ class DependencyHelper extends Module
             $factory = new ReflectionClass($factory);
             $containerProperty = $factory->getProperty('containers');
             $containerProperty->setAccessible(true);
-            $containerProperty->setValue([]);
+            $containerProperty->setValue(null, []);
         }
     }
 

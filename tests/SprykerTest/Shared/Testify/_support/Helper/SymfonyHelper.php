@@ -64,7 +64,6 @@ class SymfonyHelper extends SymfonyModule
         'app_path' => 'src',
         'kernel_class' => null,
         'cache_router' => false,
-        'em_service' => 'doctrine.orm.entity_manager',
         'rebootable_client' => true,
         'bundles' => [],
         'bundle_configurations' => [],
@@ -95,6 +94,11 @@ class SymfonyHelper extends SymfonyModule
         parent::_initialize();
     }
 
+    public function addBundleConfiguration(string $bundleName, array $configuration): void
+    {
+        $this->config['bundle_configurations'][$bundleName] = $configuration;
+    }
+
     public function _before(TestInterface $test): void
     {
         $this->originalServices = [];
@@ -109,10 +113,7 @@ class SymfonyHelper extends SymfonyModule
     protected function getKernel(): KernelInterface
     {
         if ($this->config['mode'] === 'core') {
-            $kernel = new TestKernel(
-                environment: $this->config['environment'],
-                debug: $this->config['debug'],
-            );
+            $kernel = new TestKernel(new ContainerProxy(['test' => true]));
 
             if (!empty($this->config['bundles'])) {
                 $kernel->addBundles($this->config['bundles']);

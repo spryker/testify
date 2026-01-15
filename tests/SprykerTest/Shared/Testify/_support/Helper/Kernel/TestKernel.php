@@ -9,10 +9,12 @@ declare(strict_types=1);
 
 namespace SprykerTest\Shared\Testify\Helper\Kernel;
 
+use Spryker\Service\Container\ContainerDelegator;
+use Spryker\Shared\Application\Kernel as BaseKernel;
+use SprykerTest\ApiPlatform\Test\TestModeConfiguration;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Minimal Symfony Kernel for isolated testing in core mode.
@@ -46,14 +48,11 @@ class TestKernel extends BaseKernel
     protected array $bundleConfigurations = [];
 
     /**
-     * @param string $environment The environment name (e.g., 'test')
-     * @param bool $debug Whether to enable debug mode
+     * Ensure that Symfony gets the compiled container.
      */
-    public function __construct(
-        string $environment = 'test',
-        bool $debug = true,
-    ) {
-        parent::__construct($environment, $debug);
+    public function getContainer(): ContainerInterface
+    {
+        return ContainerDelegator::getInstance()->getContainer('project_container');
     }
 
     public function addBundles(array $bundles): self
@@ -94,19 +93,18 @@ class TestKernel extends BaseKernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
+        if (TestModeConfiguration::isProjectMode()) {
+            parent::registerContainerConfiguration($loader);
+
+            return;
+        }
+
         $loader->load(function (ContainerBuilder $container): void {
-            $this->configureContainer($container);
+            $this->configureTestContainer($container);
         });
     }
 
-    /**
-     * Configure container with minimal settings.
-     *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     *
-     * @return void
-     */
-    protected function configureContainer(ContainerBuilder $container): void
+    protected function configureTestContainer(ContainerBuilder $container): void
     {
         $container->setParameter('kernel.project_dir', $this->getProjectDir());
 
@@ -128,44 +126,27 @@ class TestKernel extends BaseKernel
         $container->setParameter('kernel.bundles', $this->bundleClasses);
     }
 
-    public function loadRoutes($loader)
+    public static function getCacheDirPath(string $moduleRoot): string
     {
-        return new RouteCollection();
+        return sprintf('%s/tests/_data/symfony_test_kernel_cache/', $moduleRoot);
     }
 
-    /**
-     * Use temporary directory for cache.
-     *
-     * @return string
-     */
     public function getCacheDir(): string
     {
-        return sys_get_temp_dir() . '/symfony_test_kernel_cache/' . $this->environment;
-    }
-
-    /**
-     * Use temporary directory for logs.
-     *
-     * @return string
-     */
-    public function getLogDir(): string
-    {
-        return sys_get_temp_dir() . '/symfony_test_kernel_logs';
-    }
-
-    /**
-     * Project directory for test kernel.
-     *
-     * Uses codecept root directory if available, otherwise falls back to temporary directory.
-     *
-     * @return string
-     */
-    public function getProjectDir(): string
-    {
-        if (function_exists('codecept_root_dir')) {
-            return codecept_root_dir();
+        if (TestModeConfiguration::isProjectMode()) {
+            return parent::getCacheDir();
         }
 
-        return sys_get_temp_dir() . '/symfony_test_kernel';
+        return static::getCacheDirPath($this->getProjectDir());
+    }
+
+    public function getLogDir(): string
+    {
+        return sys_get_temp_dir();
+    }
+
+    public function getProjectDir(): string
+    {
+        return codecept_data_dir();
     }
 }

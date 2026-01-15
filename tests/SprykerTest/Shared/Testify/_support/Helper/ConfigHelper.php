@@ -91,7 +91,7 @@ class ConfigHelper extends Module
         $configProperty = $this->getConfigReflectionProperty();
         $config = $configProperty->getValue();
         $config[$key] = $value;
-        $configProperty->setValue($config);
+        $configProperty->setValue(null, $config);
     }
 
     /**
@@ -105,7 +105,7 @@ class ConfigHelper extends Module
         $configProperty = $this->getConfigReflectionProperty();
         $config = $configProperty->getValue();
         $config[$key] = $value;
-        $configProperty->setValue($config);
+        $configProperty->setValue(null, $config);
     }
 
     /**
@@ -294,7 +294,7 @@ class ConfigHelper extends Module
         $configProperty = $this->getConfigReflectionProperty();
         $config = $configProperty->getValue();
         unset($config[$key]);
-        $configProperty->setValue($config);
+        $configProperty->setValue(null, $config);
     }
 
     /**
@@ -339,6 +339,6 @@ class ConfigHelper extends Module
     private function resetConfig(): void
     {
         $reflectionProperty = $this->getConfigReflectionProperty();
-        $reflectionProperty->setValue(new ArrayObject($this->configCache));
+        $reflectionProperty->setValue(null, new ArrayObject($this->configCache));
     }
 }

@@ -40,7 +40,7 @@ trait StaticVariablesHelper
             'value' => $propertyReflection->getValue(),
         ];
 
-        $propertyReflection->setValue($value);
+        $propertyReflection->setValue(null, $value);
     }
 
     /**
@@ -52,7 +52,7 @@ trait StaticVariablesHelper
             $classReflection = new ReflectionClass($staticDefinition['className']);
             $propertyReflection = $classReflection->getProperty($staticDefinition['propertyName']);
             $propertyReflection->setAccessible(true);
-            $propertyReflection->setValue($staticDefinition['value']);
+            $propertyReflection->setValue(null, $staticDefinition['value']);
         }
     }
 }
