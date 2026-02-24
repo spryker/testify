@@ -137,7 +137,7 @@ class TestKernel extends BaseKernel
             return parent::getCacheDir();
         }
 
-        return static::getCacheDirPath($this->getProjectDir());
+        return codecept_data_dir('symfony_test_kernel_cache');
     }
 
     public function getLogDir(): string
