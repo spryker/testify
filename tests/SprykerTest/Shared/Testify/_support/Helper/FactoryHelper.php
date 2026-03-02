@@ -60,9 +60,6 @@ class FactoryHelper extends Module
         return $this->sharedFactoryStub;
     }
 
-    /**
-     * @return \Spryker\Shared\Kernel\AbstractSharedFactory
-     */
     public function getSharedFactory(): AbstractSharedFactory
     {
         if ($this->sharedFactoryStub !== null) {
@@ -75,9 +72,6 @@ class FactoryHelper extends Module
         return $sharedFactory;
     }
 
-    /**
-     * @return \Spryker\Shared\Kernel\AbstractSharedFactory
-     */
     protected function createSharedFactory(): AbstractSharedFactory
     {
         $sharedFactoryClassName = $this->getSharedFactoryClassName();
@@ -85,9 +79,6 @@ class FactoryHelper extends Module
         return new $sharedFactoryClassName();
     }
 
-    /**
-     * @return string
-     */
     protected function getSharedFactoryClassName(): string
     {
         $config = Configuration::config();
@@ -96,11 +87,6 @@ class FactoryHelper extends Module
         return sprintf(static::SHARED_FACTORY_CLASS_NAME_PATTERN, $this->removeTestSuffix($namespaceParts[0]), $namespaceParts[2]);
     }
 
-    /**
-     * @param \Spryker\Shared\Kernel\AbstractSharedFactory $sharedFactory
-     *
-     * @return \Spryker\Shared\Kernel\AbstractSharedFactory
-     */
     protected function injectSharedConfig(AbstractSharedFactory $sharedFactory): AbstractSharedFactory
     {
         if (method_exists($sharedFactory, 'setSharedConfig') && $this->hasModule('\\' . ConfigHelper::class)) {
@@ -113,9 +99,6 @@ class FactoryHelper extends Module
         return $sharedFactory;
     }
 
-    /**
-     * @return \Spryker\Shared\Kernel\AbstractSharedConfig|null
-     */
     protected function getSharedConfig(): ?AbstractSharedConfig
     {
         /** @var \Spryker\Shared\Kernel\AbstractSharedConfig|null $sharedConfig */
@@ -124,9 +107,6 @@ class FactoryHelper extends Module
         return $sharedConfig;
     }
 
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\ConfigHelper
-     */
     protected function getConfigHelper(): ConfigHelper
     {
         /** @var \SprykerTest\Shared\Testify\Helper\ConfigHelper $sharedConfigHelper */
@@ -135,11 +115,6 @@ class FactoryHelper extends Module
         return $sharedConfigHelper;
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->sharedFactoryStub = null;

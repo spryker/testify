@@ -34,11 +34,6 @@ class FixturesRunner extends Codecept
         $suiteManager->run($this->resultAggregator);
     }
 
-    /**
-     * @param \Codeception\Suite $suite
-     *
-     * @return bool
-     */
     protected function suiteContainsFixtures(Suite $suite): bool
     {
         if ($this->getTestMethodCountForSuite($suite) === 0) {
@@ -48,11 +43,6 @@ class FixturesRunner extends Codecept
         return true;
     }
 
-    /**
-     * @param \Codeception\Suite $suite
-     *
-     * @return int
-     */
     protected function getTestMethodCountForSuite(Suite $suite): int
     {
         $suiteReflection = new ReflectionClass($suite);

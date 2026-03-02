@@ -15,9 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class HttpSenderStub extends HttpSender
 {
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     public function getResponse(): Response
     {
         return $this->response;

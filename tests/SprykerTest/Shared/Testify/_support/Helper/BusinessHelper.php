@@ -67,9 +67,6 @@ class BusinessHelper extends Module
         return $this;
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Business\AbstractFacade
-     */
     public function getFacade(): AbstractFacade
     {
         $facade = $this->createFacade();
@@ -78,9 +75,6 @@ class BusinessHelper extends Module
         return $facade;
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Business\AbstractFacade
-     */
     protected function createFacade(): AbstractFacade
     {
         $currentNamespace = Configuration::config()['namespace'];
@@ -112,9 +106,6 @@ class BusinessHelper extends Module
         return $this->factoryStub;
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Business\AbstractBusinessFactory
-     */
     public function getFactory(): AbstractBusinessFactory
     {
         if ($this->factoryStub !== null) {
@@ -129,9 +120,6 @@ class BusinessHelper extends Module
         return $moduleFactory;
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Business\AbstractBusinessFactory
-     */
     protected function createModuleFactory(): AbstractBusinessFactory
     {
         $moduleFactoryClassName = $this->getFactoryClassName();
@@ -139,9 +127,6 @@ class BusinessHelper extends Module
         return new $moduleFactoryClassName();
     }
 
-    /**
-     * @return string
-     */
     protected function getFactoryClassName(): string
     {
         $config = Configuration::config();
@@ -150,25 +135,16 @@ class BusinessHelper extends Module
         return sprintf(static::BUSINESS_CLASS_NAME_PATTERN, $this->removeTestSuffix($namespaceParts[0]), $namespaceParts[1], $namespaceParts[2]);
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\AbstractBundleConfig
-     */
     protected function getConfig(): AbstractBundleConfig
     {
         return $this->getConfigHelper()->getModuleConfig();
     }
 
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\ConfigHelper
-     */
     protected function getConfigHelper(): ConfigHelper
     {
         return $this->getModule('\\' . ConfigHelper::class);
     }
 
-    /**
-     * @return \Closure
-     */
     private function createClosure(): Closure
     {
         $dependencies = $this->getDependencies();
@@ -181,9 +157,6 @@ class BusinessHelper extends Module
         return $callback;
     }
 
-    /**
-     * @return array
-     */
     private function getDependencies(): array
     {
         $dependencies = $this->dependencies;
@@ -192,11 +165,6 @@ class BusinessHelper extends Module
         return $dependencies;
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->factoryStub = null;

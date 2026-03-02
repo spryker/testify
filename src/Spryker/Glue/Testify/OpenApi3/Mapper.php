@@ -26,9 +26,6 @@ class Mapper implements MapperInterface
      */
     protected $referenceResolver;
 
-    /**
-     * @param \Spryker\Glue\Testify\OpenApi3\Reference\ReferenceResolverInterface $referenceResolver
-     */
     public function __construct(ReferenceResolverInterface $referenceResolver)
     {
         $this->referenceResolver = $referenceResolver;

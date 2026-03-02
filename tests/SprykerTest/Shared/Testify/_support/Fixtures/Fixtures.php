@@ -27,9 +27,6 @@ class Fixtures implements LoaderInterface
      */
     protected $settings;
 
-    /**
-     * @param array $settings
-     */
     public function __construct(array $settings = [])
     {
         //These are the suite settings
@@ -63,9 +60,6 @@ class Fixtures implements LoaderInterface
         return $this->tests;
     }
 
-    /**
-     * @return string
-     */
     public function getPattern(): string
     {
         return '~Fixtures\.php$~';

@@ -26,17 +26,11 @@ class DependencyHelper extends Module
      */
     protected $containerGlobals;
 
-    /**
-     * @return void
-     */
     public function _initialize(): void
     {
         $this->containerGlobals = new ContainerGlobals();
     }
 
-    /**
-     * @return void
-     */
     public function clearFactoryContainerCache(): void
     {
         $factoriesArray = [
@@ -68,11 +62,6 @@ class DependencyHelper extends Module
         $this->clearFactoryContainerCache();
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void
     {
         $this->containerGlobals->reset();

@@ -12,9 +12,6 @@ use Spryker\Shared\Testify\TestifyConstants;
 
 class OpenApi3 extends AbstractOpenApi3Helper
 {
-    /**
-     * @return string
-     */
     protected function getOpenApiSchemaFilePath(): string
     {
         return Config::get(TestifyConstants::GLUE_OPEN_API_SCHEMA);

@@ -38,11 +38,6 @@ class Fixture extends Test implements ScenarioDriven
      */
     protected $testMethod;
 
-    /**
-     * @param object $testClass
-     * @param string $methodName
-     * @param string $fileName
-     */
     public function __construct(object $testClass, string $methodName, string $fileName)
     {
         $metadata = new Metadata();
@@ -55,9 +50,6 @@ class Fixture extends Test implements ScenarioDriven
         $this->parser = new Parser($this->getScenario(), $this->getMetadata());
     }
 
-    /**
-     * @return void
-     */
     public function preload(): void
     {
         $this->scenario->setFeature($this->getSpecificationFromMethod());
@@ -72,9 +64,6 @@ class Fixture extends Test implements ScenarioDriven
         $this->getMetadata()->getService('di')->injectDependencies($this->testClassInstance);
     }
 
-    /**
-     * @return string
-     */
     public function getSourceCode(): string
     {
         $method = new ReflectionMethod($this->testClassInstance, $this->testMethod);
@@ -85,9 +74,6 @@ class Fixture extends Test implements ScenarioDriven
         return implode('', array_slice($source, $start_line, $end_line - $start_line));
     }
 
-    /**
-     * @return string
-     */
     public function getSpecificationFromMethod(): string
     {
         $text = $this->testMethod;
@@ -98,9 +84,6 @@ class Fixture extends Test implements ScenarioDriven
         return $text;
     }
 
-    /**
-     * @return void
-     */
     public function test(): void
     {
         $actorClass = $this->getMetadata()->getCurrent('actor');
@@ -130,9 +113,6 @@ class Fixture extends Test implements ScenarioDriven
         return call_user_func([$this->testClassInstance, $this->testMethod], $I, $this->scenario);
     }
 
-    /**
-     * @return string
-     */
     public function toString(): string
     {
         return sprintf(
@@ -142,43 +122,26 @@ class Fixture extends Test implements ScenarioDriven
         );
     }
 
-    /**
-     * @return string
-     */
     public function getSignature(): string
     {
         return get_class($this->getTestClass()) . ':' . $this->getTestMethod();
     }
 
-    /**
-     * @return object
-     */
     public function getTestClass(): object
     {
         return $this->testClassInstance;
     }
 
-    /**
-     * @return string
-     */
     public function getTestMethod(): string
     {
         return $this->testMethod;
     }
 
-    /**
-     * @return \Codeception\Lib\Parser
-     */
     protected function getParser(): Parser
     {
         return $this->parser;
     }
 
-    /**
-     * @param \Codeception\Actor $actor
-     *
-     * @return void
-     */
     protected function triggerSprykerRuntimeEvents(Actor $actor): void
     {
         if (method_exists($actor, 'getLocator')) {

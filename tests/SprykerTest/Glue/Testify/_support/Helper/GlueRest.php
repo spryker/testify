@@ -34,17 +34,11 @@ class GlueRest extends REST implements LastConnectionProviderInterface
      */
     protected $lastConnection;
 
-    /**
-     * @inheritDoc
-     */
     public function _initialize(): void
     {
         parent::_initialize();
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getLastConnection(): ?Connection
     {
         return $this->lastConnection;
@@ -555,9 +549,6 @@ class GlueRest extends REST implements LastConnectionProviderInterface
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function resetVariables(): void
     {
         $this->lastConnection = null;
@@ -618,9 +609,6 @@ class GlueRest extends REST implements LastConnectionProviderInterface
         return $this;
     }
 
-    /**
-     * @return \SprykerTest\Glue\Testify\Helper\JsonPath
-     */
     protected function getJsonPathModule(): JsonPath
     {
         if (!$this->jsonPathModule instanceof JsonPath) {

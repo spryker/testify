@@ -188,9 +188,6 @@ class WebDriverHelper extends Extension
         }
     }
 
-    /**
-     * @return void
-     */
     public function configureWebDriverModule(): void
     {
         if (!$this->hasModule(static::MODULE_NAME_WEBDRIVER)) {
@@ -284,9 +281,6 @@ class WebDriverHelper extends Extension
         $this->writeln('');
     }
 
-    /**
-     * @return void
-     */
     protected function stopServer(): void
     {
         if ($this->resource !== null) {
@@ -341,9 +335,6 @@ class WebDriverHelper extends Extension
         throw new ExtensionException($this, 'Unknown browser specified: ' . $browser_path);
     }
 
-    /**
-     * @return string
-     */
     protected function getCommandParameters(): string
     {
         $mapping = $this->getCommandParametersMapping();
@@ -361,9 +352,6 @@ class WebDriverHelper extends Extension
         return implode(' ', $params);
     }
 
-    /**
-     * @return string
-     */
     protected function getCommand(): string
     {
         return 'exec ' . escapeshellarg(realpath($this->config['path'])) . ' ' . $this->getCommandParameters();
@@ -384,17 +372,11 @@ class WebDriverHelper extends Extension
         return $webdriverConfig;
     }
 
-    /**
-     * @return \Codeception\Module\WebDriver
-     */
     protected function getWebDriver(): WebDriver
     {
         return $this->getModule(static::MODULE_NAME_WEBDRIVER);
     }
 
-    /**
-     * @return bool
-     */
     protected function isRemoteEnabled(): bool
     {
         $isRemoteEnabled = $this->config[static::KEY_REMOTE_ENABLE] ?? false;

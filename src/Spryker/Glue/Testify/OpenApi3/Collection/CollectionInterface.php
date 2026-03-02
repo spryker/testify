@@ -12,9 +12,6 @@ use Spryker\Glue\Testify\OpenApi3\SchemaFieldInterface;
 
 interface CollectionInterface extends SchemaFieldInterface
 {
-    /**
-     * @return \Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition
-     */
     public function getElementDefinition(): PropertyDefinition;
 
     /**
@@ -22,8 +19,5 @@ interface CollectionInterface extends SchemaFieldInterface
      */
     public function export();
 
-    /**
-     * @return array
-     */
     public function toArray(): array;
 }

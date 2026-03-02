@@ -71,11 +71,6 @@ class FactoryHelper extends Module
         return $this->factoryStubs[$moduleName];
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractFactory
-     */
     public function getFactory(?string $moduleName = null): AbstractFactory
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -95,11 +90,6 @@ class FactoryHelper extends Module
         return $moduleFactory;
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractFactory
-     */
     protected function createFactory(?string $moduleName = null): AbstractFactory
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -108,12 +98,6 @@ class FactoryHelper extends Module
         return new $moduleFactoryClassName();
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\AbstractFactory $factory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractFactory
-     */
     protected function injectConfig(AbstractFactory $factory, string $moduleName): AbstractFactory
     {
         if ($this->hasModule('\\' . ConfigHelper::class)) {
@@ -123,11 +107,6 @@ class FactoryHelper extends Module
         return $factory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractBundleConfig
-     */
     protected function getConfig(string $moduleName): AbstractBundleConfig
     {
         /** @var \Spryker\Client\Kernel\AbstractBundleConfig $moduleConfig */
@@ -136,12 +115,6 @@ class FactoryHelper extends Module
         return $moduleConfig;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\AbstractFactory $factory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractFactory
-     */
     protected function injectContainer(AbstractFactory $factory, string $moduleName): AbstractFactory
     {
         if ($this->hasModule('\\' . DependencyProviderHelper::class)) {
@@ -151,21 +124,11 @@ class FactoryHelper extends Module
         return $factory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function getContainer(string $moduleName): Container
     {
         return $this->getDependencyProviderHelper()->getModuleContainer($moduleName);
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->factoryStubs = [];

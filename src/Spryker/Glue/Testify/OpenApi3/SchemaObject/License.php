@@ -16,9 +16,6 @@ use Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition;
  */
 class License extends AbstractObject
 {
-    /**
-     * @inheritDoc
-     */
     public function getObjectSpecification(): ObjectSpecification
     {
         return (new ObjectSpecification())

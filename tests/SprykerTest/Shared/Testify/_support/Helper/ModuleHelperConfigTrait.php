@@ -22,8 +22,5 @@ trait ModuleHelperConfigTrait
         parent::__construct($moduleContainer, $config);
     }
 
-    /**
-     * @return void
-     */
     abstract protected function setDefaultConfig(): void;
 }

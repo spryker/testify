@@ -12,9 +12,6 @@ use Spryker\Glue\Testify\OpenApi3\SchemaObject\ServerVariable;
 
 class ServerVariables extends AbstractCollection
 {
-    /**
-     * @inheritDoc
-     */
     public function getElementDefinition(): PropertyDefinition
     {
         return new PropertyDefinition(ServerVariable::class);

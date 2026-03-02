@@ -52,30 +52,17 @@ class ZedBootstrap extends Framework implements DependsOnModule
         ];
     }
 
-    /**
-     * @param \SprykerTest\Shared\Testify\Helper\BundleConfig $bundleConfig
-     *
-     * @return void
-     */
     public function _inject(BundleConfig $bundleConfig): void
     {
         $this->bundleConfig = $bundleConfig;
     }
 
-    /**
-     * @return void
-     */
     public function _initialize(): void
     {
         $this->loadApplication();
         $this->mockBundleConfigs();
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         if (class_exists(HttpKernelBrowser::class)) {
@@ -87,9 +74,6 @@ class ZedBootstrap extends Framework implements DependsOnModule
         $this->client = new Client($this->application->boot());
     }
 
-    /**
-     * @return void
-     */
     protected function setDefaultConfig(): void
     {
         $this->config = [
@@ -98,9 +82,6 @@ class ZedBootstrap extends Framework implements DependsOnModule
         ];
     }
 
-    /**
-     * @return void
-     */
     protected function loadApplication(): void
     {
         Request::setTrustedHosts(['localhost']);
@@ -116,17 +97,11 @@ class ZedBootstrap extends Framework implements DependsOnModule
         $this->application = new TestifyBootstrap($this->config[static::CONFIG_KEY_APPLICATION_PLUGINS], $this->config[static::CONFIG_KEY_SERVICE_PROVIDER]);
     }
 
-    /**
-     * @return void
-     */
     private function mockBundleConfigs(): void
     {
         $this->bundleConfig->addBundleConfigMock($this->getTwigBundleConfigMock());
     }
 
-    /**
-     * @return \Spryker\Shared\Kernel\AbstractBundleConfig
-     */
     private function getTwigBundleConfigMock(): AbstractBundleConfig
     {
         $twigConfig = new TwigConfig();

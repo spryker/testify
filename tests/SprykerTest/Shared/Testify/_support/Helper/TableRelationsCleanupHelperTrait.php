@@ -11,9 +11,6 @@ use Codeception\Module;
 
 trait TableRelationsCleanupHelperTrait
 {
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\TableRelationsCleanupHelper
-     */
     protected function getTableRelationsCleanupHelper(): TableRelationsCleanupHelper
     {
         /** @var \SprykerTest\Shared\Testify\Helper\TableRelationsCleanupHelper $tableRelationsCleanupHelper */
@@ -22,10 +19,5 @@ trait TableRelationsCleanupHelperTrait
         return $tableRelationsCleanupHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

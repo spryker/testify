@@ -27,9 +27,6 @@ abstract class AbstractCollection implements CollectionInterface, IteratorAggreg
      */
     protected $elements = [];
 
-    /**
-     * @inheritDoc
-     */
     abstract public function getElementDefinition(): PropertyDefinition;
 
     /**
@@ -59,9 +56,6 @@ abstract class AbstractCollection implements CollectionInterface, IteratorAggreg
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function export(): CollectionInterface
     {
         return $this;
@@ -81,9 +75,6 @@ abstract class AbstractCollection implements CollectionInterface, IteratorAggreg
         return $result;
     }
 
-    /**
-     * @return \Traversable
-     */
     public function getIterator(): Traversable
     {
         return new ArrayIterator(array_map(function (PropertyValueInterface $element) {
@@ -91,9 +82,6 @@ abstract class AbstractCollection implements CollectionInterface, IteratorAggreg
         }, $this->elements));
     }
 
-    /**
-     * @return int
-     */
     public function count(): int
     {
         return count($this->elements);

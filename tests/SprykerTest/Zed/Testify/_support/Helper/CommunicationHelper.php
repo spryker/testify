@@ -41,9 +41,6 @@ class CommunicationHelper extends Module
      */
     protected $mockedFactoryMethods = [];
 
-    /**
-     * @return \Spryker\Zed\Kernel\Business\AbstractFacade
-     */
     public function getFacade(): AbstractFacade
     {
         $facade = $this->createFacade();
@@ -51,9 +48,6 @@ class CommunicationHelper extends Module
         return $facade;
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Business\AbstractFacade
-     */
     protected function createFacade(): AbstractFacade
     {
         $config = Configuration::config();
@@ -94,9 +88,6 @@ class CommunicationHelper extends Module
         return $this->factoryStub;
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory
-     */
     public function getFactory(): AbstractCommunicationFactory
     {
         if ($this->factoryStub !== null) {
@@ -108,9 +99,6 @@ class CommunicationHelper extends Module
         return $this->injectConfig($moduleFactory);
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory
-     */
     protected function createFactory(): AbstractCommunicationFactory
     {
         $moduleFactoryClassName = $this->getFactoryClassName();
@@ -118,9 +106,6 @@ class CommunicationHelper extends Module
         return new $moduleFactoryClassName();
     }
 
-    /**
-     * @return string
-     */
     protected function getFactoryClassName(): string
     {
         $config = Configuration::config();
@@ -143,35 +128,21 @@ class CommunicationHelper extends Module
         return $moduleFactory;
     }
 
-    /**
-     * @return bool
-     */
     protected function hasConfigHelper(): bool
     {
         return $this->hasModule('\\' . ConfigHelper::class);
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\AbstractBundleConfig
-     */
     protected function getConfig(): AbstractBundleConfig
     {
         return $this->getConfigHelper()->getModuleConfig();
     }
 
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\ConfigHelper
-     */
     protected function getConfigHelper(): ConfigHelper
     {
         return $this->getModule('\\' . ConfigHelper::class);
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->factoryStub = null;

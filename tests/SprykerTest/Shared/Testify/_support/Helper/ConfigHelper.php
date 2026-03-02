@@ -58,9 +58,6 @@ class ConfigHelper extends Module
      */
     protected $mockedSharedConfigMethods = [];
 
-    /**
-     * @return void
-     */
     public function _initialize(): void
     {
         Config::init();
@@ -68,9 +65,6 @@ class ConfigHelper extends Module
         $this->configCache = $reflectionProperty->getValue()->getArrayCopy();
     }
 
-    /**
-     * @return \ReflectionProperty
-     */
     protected function getConfigReflectionProperty(): ReflectionProperty
     {
         $reflection = new ReflectionClass(Config::class);
@@ -171,11 +165,6 @@ class ConfigHelper extends Module
         return $this->sharedConfigStubs[$moduleName];
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Shared\Kernel\AbstractBundleConfig
-     */
     public function getModuleConfig(?string $moduleName = null): AbstractBundleConfig
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -192,11 +181,6 @@ class ConfigHelper extends Module
         return $moduleConfig;
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Shared\Kernel\AbstractSharedConfig|null
-     */
     public function getSharedModuleConfig(?string $moduleName = null): ?AbstractSharedConfig
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -222,22 +206,11 @@ class ConfigHelper extends Module
         return new $moduleConfigClassName();
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return bool
-     */
     public function configExists(string $moduleName): bool
     {
         return $this->resolveClassName(static::CONFIG_CLASS_NAME_PATTERN, $moduleName) !== null;
     }
 
-    /**
-     * @param \Spryker\Shared\Kernel\AbstractBundleConfig $moduleConfig
-     * @param string $moduleName
-     *
-     * @return \Spryker\Shared\Kernel\AbstractBundleConfig
-     */
     protected function injectSharedConfig(AbstractBundleConfig $moduleConfig, string $moduleName): AbstractBundleConfig
     {
         if (!method_exists($moduleConfig, 'setSharedConfig')) {
@@ -254,11 +227,6 @@ class ConfigHelper extends Module
         return $moduleConfig;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Shared\Kernel\AbstractSharedConfig|null
-     */
     protected function getSharedConfig(string $moduleName): ?AbstractSharedConfig
     {
         if (isset($this->sharedConfigStubs[$moduleName])) {
@@ -268,11 +236,6 @@ class ConfigHelper extends Module
         return $this->createSharedConfig($moduleName);
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Shared\Kernel\AbstractSharedConfig|null
-     */
     protected function createSharedConfig(string $moduleName): ?AbstractSharedConfig
     {
         $sharedConfigClassName = $this->resolveClassName(static::SHARED_CONFIG_CLASS_NAME_PATTERN, $moduleName);
@@ -284,11 +247,6 @@ class ConfigHelper extends Module
         return new $sharedConfigClassName();
     }
 
-    /**
-     * @param string $key
-     *
-     * @return void
-     */
     public function removeConfig(string $key): void
     {
         $configProperty = $this->getConfigReflectionProperty();
@@ -297,11 +255,6 @@ class ConfigHelper extends Module
         $configProperty->setValue(null, $config);
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->configStubs = [];
@@ -311,11 +264,6 @@ class ConfigHelper extends Module
         $this->mockedSharedConfigMethods = [];
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void
     {
         $this->resetConfig();
@@ -325,17 +273,11 @@ class ConfigHelper extends Module
         $this->mockedSharedConfigMethods = [];
     }
 
-    /**
-     * @return void
-     */
     public function _afterSuite(): void
     {
         $this->resetConfig();
     }
 
-    /**
-     * @return void
-     */
     private function resetConfig(): void
     {
         $reflectionProperty = $this->getConfigReflectionProperty();

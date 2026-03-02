@@ -12,9 +12,6 @@ use Spryker\Glue\Testify\OpenApi3\SchemaObject\Server;
 
 class Servers extends AbstractCollection
 {
-    /**
-     * @inheritDoc
-     */
     public function getElementDefinition(): PropertyDefinition
     {
         return new PropertyDefinition(Server::class);

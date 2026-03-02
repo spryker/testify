@@ -36,11 +36,6 @@ class StepOverrider extends Scenario
      */
     protected $prepositions = [];
 
-    /**
-     * @param \Codeception\Scenario $scenario
-     * @param string $stepDescription
-     * @param callable $releaseHook
-     */
     public function __construct(Scenario $scenario, string $stepDescription, callable $releaseHook)
     {
         $this->scenario = $scenario;
@@ -78,17 +73,11 @@ class StepOverrider extends Scenario
         return $this->scenario->runStep($step);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setFeature(string $feature): void
     {
         $this->scenario->setFeature($feature);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getFeature(): string
     {
         return $this->scenario->getFeature();
@@ -110,9 +99,6 @@ class StepOverrider extends Scenario
         return $this->scenario->current($key);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function addStep(Step $step): void
     {
         $this->scenario->addStep($step);
@@ -126,65 +112,41 @@ class StepOverrider extends Scenario
         return $this->scenario->getSteps();
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getHtml(): string
     {
         return $this->scenario->getHtml();
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getText(): string
     {
         return $this->scenario->getText();
     }
 
-    /**
-     * @inheritDoc
-     */
     public function comment(string $comment): void
     {
         $this->scenario->comment($comment);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function skip(string $message = ''): void
     {
         $this->scenario->skip($message);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function incomplete(string $message = ''): void
     {
         $this->scenario->incomplete($message);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setMetaStep(?Meta $metaStep): void
     {
         $this->scenario->setMetaStep($metaStep);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getMetaStep(): ?Meta
     {
         return $this->scenario->getMetaStep();
     }
 
-    /**
-     * @return string
-     */
     protected function getPreposition(): string
     {
         return count($this->prepositions) > 0 ? ' ' . trim(implode(' ', $this->prepositions)) . ' ' : '';

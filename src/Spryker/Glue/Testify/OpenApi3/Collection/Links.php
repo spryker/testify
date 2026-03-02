@@ -12,9 +12,6 @@ use Spryker\Glue\Testify\OpenApi3\SchemaObject\Link;
 
 class Links extends AbstractCollection
 {
-    /**
-     * @inheritDoc
-     */
     public function getElementDefinition(): PropertyDefinition
     {
         return new PropertyDefinition(Link::class);

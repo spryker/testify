@@ -33,9 +33,6 @@ class CommunicationHelperTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testGetFactoryWillSetConfigIfConfigExists(): void
     {
         // Arrange
@@ -53,9 +50,6 @@ class CommunicationHelperTest extends Unit
         $this->assertInstanceOf(AbstractBundleConfig::class, $communicationFactory->getConfig());
     }
 
-    /**
-     * @return void
-     */
     public function testGetFactoryWillNotSetConfigIfConfigDoesNotExists(): void
     {
         // Arrange

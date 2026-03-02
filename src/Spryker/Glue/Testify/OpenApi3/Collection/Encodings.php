@@ -12,9 +12,6 @@ use Spryker\Glue\Testify\OpenApi3\SchemaObject\Encoding;
 
 class Encodings extends AbstractCollection
 {
-    /**
-     * @inheritDoc
-     */
     public function getElementDefinition(): PropertyDefinition
     {
         return new PropertyDefinition(Encoding::class);

@@ -21,27 +21,17 @@ class PropertyValue implements PropertyValueInterface
      */
     protected $value;
 
-    /**
-     * @param \Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition $definition
-     * @param \Spryker\Glue\Testify\OpenApi3\SchemaFieldInterface $value
-     */
     public function __construct(PropertyDefinition $definition, SchemaFieldInterface $value)
     {
         $this->definition = $definition;
         $this->value = $value;
     }
 
-    /**
-     * @return \Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition
-     */
     public function getDefinition(): PropertyDefinition
     {
         return $this->definition;
     }
 
-    /**
-     * @return \Spryker\Glue\Testify\OpenApi3\SchemaFieldInterface
-     */
     public function getValue(): SchemaFieldInterface
     {
         return $this->value;

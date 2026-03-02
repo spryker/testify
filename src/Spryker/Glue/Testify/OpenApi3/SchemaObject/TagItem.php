@@ -19,9 +19,6 @@ use Spryker\Glue\Testify\OpenApi3\Reference\ReferableInterface;
  */
 class TagItem extends AbstractObject implements ReferableInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function getObjectSpecification(): ObjectSpecification
     {
         return (new ObjectSpecification())

@@ -14,11 +14,6 @@ use Spryker\Zed\Kernel\Container;
 
 class BootstrapHelper extends Framework
 {
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         GlobalContainer::setContainer(new Container([]));

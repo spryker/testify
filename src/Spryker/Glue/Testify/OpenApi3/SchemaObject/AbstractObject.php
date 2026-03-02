@@ -18,9 +18,6 @@ abstract class AbstractObject implements ObjectInterface
      */
     protected $propertyValues;
 
-    /**
-     * @inheritDoc
-     */
     abstract public function getObjectSpecification(): ObjectSpecification;
 
     /**
@@ -46,9 +43,6 @@ abstract class AbstractObject implements ObjectInterface
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function export(): ObjectInterface
     {
         return $this;

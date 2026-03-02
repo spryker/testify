@@ -117,12 +117,6 @@ class ClientHelper extends Module
         return new $moduleClientClassName();
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\AbstractClient $client
-     * @param string $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractClient
-     */
     protected function injectFactory(AbstractClient $client, string $moduleName): AbstractClient
     {
         $client->setFactory($this->getFactory($moduleName));
@@ -160,11 +154,6 @@ class ClientHelper extends Module
         return $this->factoryStubs[$moduleName];
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractFactory
-     */
     public function getFactory(?string $moduleName = null): AbstractFactory
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -184,11 +173,6 @@ class ClientHelper extends Module
         return $moduleFactory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractFactory
-     */
     protected function createFactory(string $moduleName): AbstractFactory
     {
         $moduleFactoryClassName = $this->resolveClassName(static::CLIENT_FACTORY_CLASS_NAME_PATTERN, $moduleName);
@@ -196,12 +180,6 @@ class ClientHelper extends Module
         return new $moduleFactoryClassName();
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\AbstractFactory $clientFactory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractFactory
-     */
     protected function injectConfig(AbstractFactory $clientFactory, string $moduleName): AbstractFactory
     {
         if (!$this->hasModule('\\' . ConfigHelper::class)) {
@@ -217,11 +195,6 @@ class ClientHelper extends Module
         return $clientFactory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractBundleConfig|null
-     */
     protected function getConfig(string $moduleName): ?AbstractBundleConfig
     {
         try {
@@ -234,12 +207,6 @@ class ClientHelper extends Module
         }
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\AbstractFactory $factory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractFactory
-     */
     protected function injectContainer(AbstractFactory $factory, string $moduleName): AbstractFactory
     {
         if ($this->hasModule('\\' . DependencyProviderHelper::class)) {
@@ -249,11 +216,6 @@ class ClientHelper extends Module
         return $factory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function getContainer(string $moduleName): Container
     {
         return $this->getDependencyProviderHelper()->getModuleContainer($moduleName);

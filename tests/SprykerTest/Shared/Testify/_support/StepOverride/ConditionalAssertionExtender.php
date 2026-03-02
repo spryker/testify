@@ -17,9 +17,6 @@ class ConditionalAssertionExtender extends ConditionalAssertion implements StepD
      */
     protected $stepDescription;
 
-    /**
-     * @return string
-     */
     protected function getStepDescription(): string
     {
         return $this->stepDescription;

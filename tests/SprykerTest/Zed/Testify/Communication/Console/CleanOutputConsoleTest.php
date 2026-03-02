@@ -28,9 +28,6 @@ class CleanOutputConsoleTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testExecuteWillRemoveGeneratedOutputFilesInSpecifiedDirectories(): void
     {
         $this->createTestFile();
@@ -52,9 +49,6 @@ class CleanOutputConsoleTest extends Unit
         $this->assertSame(CleanOutputConsole::CODE_SUCCESS, $commandTester->getStatusCode());
     }
 
-    /**
-     * @return void
-     */
     protected function createTestFile(): void
     {
         $pathToFile = codecept_data_dir('Fixtures/foo.file');

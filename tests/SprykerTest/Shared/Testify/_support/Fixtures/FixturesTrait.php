@@ -13,9 +13,6 @@ use Codeception\Scenario;
 
 trait FixturesTrait
 {
-    /**
-     * @return \Codeception\Scenario
-     */
     abstract protected function getScenario(): Scenario;
 
     /**
@@ -71,11 +68,6 @@ trait FixturesTrait
         }
     }
 
-    /**
-     * @param string $className
-     *
-     * @return string
-     */
     protected function getFixturesFileName(string $className): string
     {
         $path = Configuration::supportDir() . '_generated' . DIRECTORY_SEPARATOR;

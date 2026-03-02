@@ -16,11 +16,6 @@ trait MessageFormatter
      */
     protected $formatter;
 
-    /**
-     * @param string $message
-     *
-     * @return string
-     */
     protected function format(string $message): string
     {
         $formatter = $this->getFormatter();
@@ -28,9 +23,6 @@ trait MessageFormatter
         return $formatter->format($message);
     }
 
-    /**
-     * @return \Symfony\Component\Console\Formatter\OutputFormatter
-     */
     protected function getFormatter(): OutputFormatter
     {
         if ($this->formatter === null) {

@@ -12,9 +12,6 @@ use Spryker\Glue\Testify\OpenApi3\SchemaObject\Header;
 
 class Headers extends AbstractCollection
 {
-    /**
-     * @inheritDoc
-     */
     public function getElementDefinition(): PropertyDefinition
     {
         return new PropertyDefinition(Header::class);

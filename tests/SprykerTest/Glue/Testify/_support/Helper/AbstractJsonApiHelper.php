@@ -28,19 +28,10 @@ abstract class AbstractJsonApiHelper extends RestHelper implements LastConnectio
      */
     protected $lastConnection;
 
-    /**
-     * @return void
-     */
     abstract protected function prepareHeaders(): void;
 
-    /**
-     * @return string
-     */
     abstract protected function getApplicationDomain(): string;
 
-    /**
-     * @return \SprykerTest\Glue\Testify\Helper\Connection|null
-     */
     public function getLastConnection(): ?Connection
     {
         return $this->lastConnection;
@@ -614,9 +605,6 @@ abstract class AbstractJsonApiHelper extends RestHelper implements LastConnectio
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function resetVariables(): void
     {
         $this->lastConnection = null;
@@ -669,9 +657,6 @@ abstract class AbstractJsonApiHelper extends RestHelper implements LastConnectio
         return $this;
     }
 
-    /**
-     * @return \SprykerTest\Glue\Testify\Helper\JsonPath
-     */
     protected function getJsonPathModule(): JsonPath
     {
         if (!$this->jsonPathModule instanceof JsonPath) {

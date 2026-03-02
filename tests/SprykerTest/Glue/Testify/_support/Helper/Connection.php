@@ -9,14 +9,8 @@ namespace SprykerTest\Glue\Testify\Helper;
 
 interface Connection
 {
-    /**
-     * @return string
-     */
     public function getRequestUrl(): string;
 
-    /**
-     * @return string
-     */
     public function getRequestMethod(): string;
 
     /**
@@ -24,23 +18,11 @@ interface Connection
      */
     public function getRequestParameters();
 
-    /**
-     * @return array
-     */
     public function getRequestFiles(): array;
 
-    /**
-     * @return string
-     */
     public function getResponseBody(): string;
 
-    /**
-     * @return int
-     */
     public function getResponseCode(): int;
 
-    /**
-     * @return string
-     */
     public function getResponseContentType(): string;
 }

@@ -133,11 +133,6 @@ class BusinessHelper extends AbstractHelper
         return $this->facadeStubs[$moduleName];
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Business\AbstractFacade
-     */
     public function getFacade(?string $moduleName = null): AbstractFacade
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -151,12 +146,6 @@ class BusinessHelper extends AbstractHelper
         return $this->facadeStubs[$moduleName];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Business\AbstractFacade $facade
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Business\AbstractFacade
-     */
     protected function injectFactory(AbstractFacade $facade, string $moduleName): AbstractFacade
     {
         $facade->setFactory($this->getFactory($moduleName));
@@ -164,11 +153,6 @@ class BusinessHelper extends AbstractHelper
         return $facade;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Business\AbstractFacade
-     */
     protected function createFacade(string $moduleName): AbstractFacade
     {
         $className = $this->resolveClassName(static::BUSINESS_FACADE_CLASS_NAME_PATTERN, $moduleName, static::APPLICATION_NAME);
@@ -236,11 +220,6 @@ class BusinessHelper extends AbstractHelper
         return $this->sharedFactoryStubs[$moduleName];
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Business\AbstractBusinessFactory
-     */
     public function getFactory(?string $moduleName = null): AbstractBusinessFactory
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -268,11 +247,6 @@ class BusinessHelper extends AbstractHelper
         return $moduleFactory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Business\AbstractBusinessFactory
-     */
     protected function createFactory(string $moduleName): AbstractBusinessFactory
     {
         $moduleFactoryClassName = $this->resolveClassName(static::BUSINESS_FACTORY_CLASS_NAME_PATTERN, $moduleName, static::APPLICATION_NAME);
@@ -280,12 +254,6 @@ class BusinessHelper extends AbstractHelper
         return new $moduleFactoryClassName();
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Business\AbstractBusinessFactory $businessFactory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Business\AbstractBusinessFactory
-     */
     protected function injectConfig(AbstractBusinessFactory $businessFactory, string $moduleName): AbstractBusinessFactory
     {
         if (!$this->hasModule('\\' . ConfigHelper::class)) {
@@ -307,11 +275,6 @@ class BusinessHelper extends AbstractHelper
         return $businessFactory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\AbstractBundleConfig|null
-     */
     protected function getConfig(string $moduleName): ?AbstractBundleConfig
     {
         try {
@@ -324,12 +287,6 @@ class BusinessHelper extends AbstractHelper
         }
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Business\AbstractBusinessFactory $factory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Business\AbstractBusinessFactory
-     */
     protected function injectContainer(AbstractBusinessFactory $factory, string $moduleName): AbstractBusinessFactory
     {
         if ($this->hasModule('\\' . DependencyProviderHelper::class)) {
@@ -339,12 +296,6 @@ class BusinessHelper extends AbstractHelper
         return $factory;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Business\AbstractBusinessFactory $factory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Business\AbstractBusinessFactory
-     */
     protected function injectSharedFactory(AbstractBusinessFactory $factory, string $moduleName): AbstractBusinessFactory
     {
         $sharedFactory = $this->getSharedFactory($moduleName);
@@ -356,11 +307,6 @@ class BusinessHelper extends AbstractHelper
         return $factory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Shared\Kernel\AbstractSharedFactory|null
-     */
     protected function getSharedFactory(string $moduleName): ?AbstractSharedFactory
     {
         if (isset($this->sharedFactoryStubs[$moduleName])) {
@@ -380,11 +326,6 @@ class BusinessHelper extends AbstractHelper
         return $sharedModuleFactory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Shared\Kernel\AbstractSharedFactory|null
-     */
     protected function createSharedFactory(string $moduleName): ?AbstractSharedFactory
     {
         /** @var \Spryker\Shared\Kernel\AbstractSharedFactory $sharedFactory */
@@ -393,12 +334,6 @@ class BusinessHelper extends AbstractHelper
         return $sharedFactory;
     }
 
-    /**
-     * @param \Spryker\Shared\Kernel\AbstractSharedFactory $sharedFactory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Shared\Kernel\AbstractSharedFactory
-     */
     protected function injectSharedConfig(AbstractSharedFactory $sharedFactory, string $moduleName): AbstractSharedFactory
     {
         if ($this->hasModule('\\' . ConfigHelper::class)) {
@@ -427,12 +362,6 @@ class BusinessHelper extends AbstractHelper
         return $sharedModuleConfig;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Business\AbstractBusinessFactory $businessFactory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Business\AbstractBusinessFactory
-     */
     protected function injectQueryContainer(AbstractBusinessFactory $businessFactory, string $moduleName): AbstractBusinessFactory
     {
         $queryContainer = $this->createQueryContainer($moduleName);
@@ -444,11 +373,6 @@ class BusinessHelper extends AbstractHelper
         return $businessFactory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Persistence\AbstractQueryContainer|null
-     */
     protected function createQueryContainer(string $moduleName): ?AbstractQueryContainer
     {
         /** @var \Spryker\Zed\Kernel\Persistence\AbstractQueryContainer $queryContainer */
@@ -457,12 +381,6 @@ class BusinessHelper extends AbstractHelper
         return $queryContainer;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Business\AbstractBusinessFactory $businessFactory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Business\AbstractBusinessFactory
-     */
     protected function injectEntityManager(AbstractBusinessFactory $businessFactory, string $moduleName): AbstractBusinessFactory
     {
         $entityManager = $this->createEntityManager($moduleName);
@@ -474,11 +392,6 @@ class BusinessHelper extends AbstractHelper
         return $businessFactory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Persistence\AbstractEntityManager|null
-     */
     protected function createEntityManager(string $moduleName): ?AbstractEntityManager
     {
         /** @var \Spryker\Zed\Kernel\Persistence\AbstractEntityManager $entityManager */
@@ -487,12 +400,6 @@ class BusinessHelper extends AbstractHelper
         return $entityManager;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Business\AbstractBusinessFactory $businessFactory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Business\AbstractBusinessFactory
-     */
     protected function injectRepository(AbstractBusinessFactory $businessFactory, string $moduleName): AbstractBusinessFactory
     {
         $repository = $this->createRepository($moduleName);
@@ -504,11 +411,6 @@ class BusinessHelper extends AbstractHelper
         return $businessFactory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Persistence\AbstractRepository|null
-     */
     protected function createRepository(string $moduleName): ?AbstractRepository
     {
         /** @var \Spryker\Zed\Kernel\Persistence\AbstractRepository $repository */
@@ -517,21 +419,11 @@ class BusinessHelper extends AbstractHelper
         return $repository;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function getContainer(string $moduleName): Container
     {
         return $this->getDependencyProviderHelper()->getModuleContainer($moduleName);
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->factoryStubs = [];

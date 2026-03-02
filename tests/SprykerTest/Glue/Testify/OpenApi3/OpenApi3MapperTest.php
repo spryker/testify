@@ -24,9 +24,6 @@ use SprykerTest\Glue\Testify\OpenApi3\Stub\Document;
  */
 class OpenApi3MapperTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testMapperShouldBeAbleToMapCollectionAndPrimitives(): void
     {
         $document = new Document();
@@ -57,9 +54,6 @@ class OpenApi3MapperTest extends Unit
         $this->assertEquals(['value 1', 'value 2', 'value 3'], $document->foo1->bar->toArray());
     }
 
-    /**
-     * @return void
-     */
     public function testMapperShouldBeAbleToMapReferences(): void
     {
         $document = new Document();

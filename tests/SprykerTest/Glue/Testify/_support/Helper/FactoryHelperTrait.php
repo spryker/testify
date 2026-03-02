@@ -11,9 +11,6 @@ use Codeception\Module;
 
 trait FactoryHelperTrait
 {
-    /**
-     * @return \SprykerTest\Glue\Testify\Helper\FactoryHelper
-     */
     protected function getFactoryHelper(): FactoryHelper
     {
         /** @var \SprykerTest\Glue\Testify\Helper\FactoryHelper $factoryHelper */
@@ -22,10 +19,5 @@ trait FactoryHelperTrait
         return $factoryHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

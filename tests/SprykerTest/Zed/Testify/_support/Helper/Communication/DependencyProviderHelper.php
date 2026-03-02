@@ -13,12 +13,6 @@ use SprykerTest\Zed\Testify\Helper\AbstractDependencyProviderHelper;
 
 class DependencyProviderHelper extends AbstractDependencyProviderHelper
 {
-    /**
-     * @param \Spryker\Zed\Kernel\AbstractBundleDependencyProvider $dependencyProvider
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function provide(AbstractBundleDependencyProvider $dependencyProvider, Container $container): Container
     {
         return $dependencyProvider->provideCommunicationLayerDependencies($container);

@@ -30,23 +30,11 @@ class SeeHelper extends Module
         }
     }
 
-    /**
-     * @param string $pattern
-     * @param string $selector
-     *
-     * @return void
-     */
     public function seeMatches(string $pattern, string $selector): void
     {
         Assert::assertMatchesRegularExpression($pattern, $this->grabMultipleAsText($selector));
     }
 
-    /**
-     * @param string $pattern
-     * @param string $selector
-     *
-     * @return void
-     */
     public function dontSeeMatches(string $pattern, string $selector): void
     {
         Assert::assertDoesNotMatchRegularExpression($pattern, $this->grabMultipleAsText($selector));

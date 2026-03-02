@@ -61,9 +61,6 @@ class ZedBootstrap
         return $this->getApplication();
     }
 
-    /**
-     * @return \Spryker\Shared\Application\Application
-     */
     private function getApplication(): Application
     {
         $container = $this->getContainer();
@@ -82,11 +79,6 @@ class ZedBootstrap
         return $application;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function cleanupStatics(ContainerInterface $container): ContainerInterface
     {
         $reflectionClass = (new ReflectionClass($container));
@@ -100,9 +92,6 @@ class ZedBootstrap
         return $container;
     }
 
-    /**
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function getContainer(): ContainerInterface
     {
         if (class_exists(LegacyApplication::class)) {
@@ -142,11 +131,6 @@ class ZedBootstrap
         return $application;
     }
 
-    /**
-     * @param \Spryker\Shared\Application\Application $application
-     *
-     * @return \Spryker\Shared\Application\Application
-     */
     private function registerApplicationPlugins(Application $application): Application
     {
         $applicationPlugins = $this->getApplicationPlugins();

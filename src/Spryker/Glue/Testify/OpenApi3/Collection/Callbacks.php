@@ -11,9 +11,6 @@ use Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition;
 
 class Callbacks extends AbstractCollection
 {
-    /**
-     * @inheritDoc
-     */
     public function getElementDefinition(): PropertyDefinition
     {
         return new PropertyDefinition(Callback::class);

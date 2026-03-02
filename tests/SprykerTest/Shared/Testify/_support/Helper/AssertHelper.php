@@ -12,13 +12,6 @@ use PHPUnit\Framework\Assert;
 
 class AssertHelper extends Module
 {
-    /**
-     * @param string $expected
-     * @param array $collection
-     * @param string $message
-     *
-     * @return void
-     */
     public function assertAllInstanceOf(string $expected, array $collection, string $message = ''): void
     {
         foreach ($collection as $item) {

@@ -32,9 +32,6 @@ class Environment extends Module
      */
     protected $rootDirectory;
 
-    /**
-     * @return void
-     */
     public function _initialize(): void
     {
         $this->prepareIsolatedModuleTests();
@@ -60,9 +57,6 @@ class Environment extends Module
         putenv('SPRYKER_ACTIVE_STORES=' . SPRYKER_ACTIVE_STORES);
     }
 
-    /**
-     * @return void
-     */
     protected function setDefaultConfig(): void
     {
         $this->config = [
@@ -70,9 +64,6 @@ class Environment extends Module
         ];
     }
 
-    /**
-     * @return void
-     */
     protected function prepareIsolatedModuleTests(): void
     {
         if ($this->config[static::CONFIG_IS_ISOLATED_MODULE_TEST]) {
@@ -81,9 +72,6 @@ class Environment extends Module
         }
     }
 
-    /**
-     * @return void
-     */
     protected function createDefaultStoreFile(): void
     {
         $defaultFileContent = sprintf('<?php return "%s";', $this->config['defaultStore'] ?? 'DE');
@@ -96,9 +84,6 @@ class Environment extends Module
         file_put_contents($pathToFile, $defaultFileContent);
     }
 
-    /**
-     * @return void
-     */
     protected function createStoresFile(): void
     {
         $defaultStoreConfiguration = [
@@ -121,9 +106,6 @@ class Environment extends Module
         file_put_contents($pathToFile, $storesFileContent);
     }
 
-    /**
-     * @return string|null
-     */
     protected function getModuleUnderTestRootDirectory(): ?string
     {
         if ($this->config[static::CONFIG_IS_ISOLATED_MODULE_TEST]) {
@@ -133,9 +115,6 @@ class Environment extends Module
         return null;
     }
 
-    /**
-     * @return string
-     */
     protected function buildModuleUnderTestRootDirectory(): string
     {
         $pathParts = explode(DIRECTORY_SEPARATOR, Configuration::projectDir());
@@ -145,9 +124,6 @@ class Environment extends Module
         return DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $rootDirPathParts) . DIRECTORY_SEPARATOR;
     }
 
-    /**
-     * @return string
-     */
     protected function getRootDirectory(): string
     {
         if ($this->canBuildVirtualDirectory()) {
@@ -176,17 +152,11 @@ class Environment extends Module
         return $this->rootDirectory;
     }
 
-    /**
-     * @return bool
-     */
     protected function canBuildVirtualDirectory(): bool
     {
         return ($this->config[static::CONFIG_IS_ISOLATED_MODULE_TEST] && $this->hasModule('\\' . VirtualFilesystemHelper::class));
     }
 
-    /**
-     * @return string
-     */
     protected function buildVirtualDirectory(): string
     {
         if (!$this->rootDirectory) {
@@ -196,9 +166,6 @@ class Environment extends Module
         return $this->rootDirectory;
     }
 
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\VirtualFilesystemHelper
-     */
     protected function getVirtualFilesystemHelper(): VirtualFilesystemHelper
     {
         /** @var \SprykerTest\Shared\Testify\Helper\VirtualFilesystemHelper $virtualDirectoryHelper */
@@ -235,17 +202,11 @@ class Environment extends Module
         );
     }
 
-    /**
-     * @return string
-     */
     protected function getCodeBucket(): string
     {
         return (new CodeBucketConfig())->getCurrentCodeBucket();
     }
 
-    /**
-     * @return string
-     */
     protected function getApplicationEnvironment(): string
     {
         if (getenv('SPRYKER_TESTING_ENABLED')) {
@@ -255,9 +216,6 @@ class Environment extends Module
         return static::TESTING_APPLICATION_ENV_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     private function getDefaultStore(): ?string
     {
         $defaultStoreFile = $this->getRootDirectory() . '/config/Shared/default_store.php';
@@ -269,9 +227,6 @@ class Environment extends Module
         return null;
     }
 
-    /**
-     * @return string|null
-     */
     private function getFirstDefinedStore(): ?string
     {
         $storesFile = $this->getRootDirectory() . '/config/Shared/stores.php';
@@ -285,9 +240,6 @@ class Environment extends Module
         return null;
     }
 
-    /**
-     * @return void
-     */
     protected function defineStore(): void
     {
         if (!Store::isDynamicStoreMode()) {

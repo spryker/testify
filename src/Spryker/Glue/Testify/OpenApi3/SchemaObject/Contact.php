@@ -17,9 +17,6 @@ use Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition;
  */
 class Contact extends AbstractObject
 {
-    /**
-     * @inheritDoc
-     */
     public function getObjectSpecification(): ObjectSpecification
     {
         return (new ObjectSpecification())

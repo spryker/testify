@@ -22,9 +22,6 @@ trait ConfigHelperTrait
         $this->getConfigHelper()->setConfig($key, $value);
     }
 
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\ConfigHelper
-     */
     protected function getConfigHelper(): ConfigHelper
     {
         /** @var \SprykerTest\Shared\Testify\Helper\ConfigHelper $configHelper */
@@ -33,10 +30,5 @@ trait ConfigHelperTrait
         return $configHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

@@ -11,9 +11,6 @@ use Codeception\Module;
 
 trait ClassHelperTrait
 {
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\ClassHelper
-     */
     protected function getClassHelper(): ClassHelper
     {
         /** @var \SprykerTest\Shared\Testify\Helper\ClassHelper $classHelper */
@@ -22,10 +19,5 @@ trait ClassHelperTrait
         return $classHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

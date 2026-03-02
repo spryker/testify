@@ -9,8 +9,5 @@ namespace SprykerTest\Glue\Testify\Helper;
 
 interface LastConnectionProviderInterface
 {
-    /**
-     * @return \SprykerTest\Glue\Testify\Helper\Connection|null
-     */
     public function getLastConnection(): ?Connection;
 }

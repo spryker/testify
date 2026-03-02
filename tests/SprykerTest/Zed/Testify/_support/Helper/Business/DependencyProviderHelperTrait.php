@@ -11,9 +11,6 @@ use Codeception\Module;
 
 trait DependencyProviderHelperTrait
 {
-    /**
-     * @return \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
-     */
     protected function getDependencyProviderHelper(): DependencyProviderHelper
     {
         /** @var \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper $dependencyProviderHelper */
@@ -22,10 +19,5 @@ trait DependencyProviderHelperTrait
         return $dependencyProviderHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

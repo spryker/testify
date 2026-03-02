@@ -30,39 +30,21 @@ class BundleConfig extends Module
         $this->bundleConfigMock = new BundleConfigMock();
     }
 
-    /**
-     * @param \Spryker\Shared\Kernel\AbstractBundleConfig $bundleConfig
-     *
-     * @return void
-     */
     public function addBundleConfigMock(AbstractBundleConfig $bundleConfig): void
     {
         $this->bundleConfigMock->addBundleConfigMock($bundleConfig);
     }
 
-    /**
-     * @param \Spryker\Shared\Kernel\AbstractBundleConfig $bundleConfig
-     *
-     * @return bool
-     */
     public function hasBundleConfigMock(AbstractBundleConfig $bundleConfig): bool
     {
         return $this->bundleConfigMock->hasBundleConfigMock($bundleConfig);
     }
 
-    /**
-     * @param \Spryker\Shared\Kernel\AbstractBundleConfig $bundleConfig
-     *
-     * @return \Spryker\Shared\Kernel\AbstractBundleConfig
-     */
     public function getBundleConfigMock(AbstractBundleConfig $bundleConfig): AbstractBundleConfig
     {
         return $this->bundleConfigMock->getBundleConfigMock($bundleConfig);
     }
 
-    /**
-     * @return void
-     */
     public function reset(): void
     {
         $this->bundleConfigMock->reset();

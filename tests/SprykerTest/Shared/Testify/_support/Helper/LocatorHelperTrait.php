@@ -19,9 +19,6 @@ trait LocatorHelperTrait
         return $this->getLocatorHelper()->getLocator();
     }
 
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\LocatorHelper
-     */
     protected function getLocatorHelper(): LocatorHelper
     {
         /** @var \SprykerTest\Shared\Testify\Helper\LocatorHelper $locatorHelper */
@@ -30,10 +27,5 @@ trait LocatorHelperTrait
         return $locatorHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

@@ -11,9 +11,6 @@ use Codeception\Module;
 
 trait BusinessHelperTrait
 {
-    /**
-     * @return \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
-     */
     protected function getBusinessHelper(): BusinessHelper
     {
         /** @var \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper $businessHelper */
@@ -22,10 +19,5 @@ trait BusinessHelperTrait
         return $businessHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

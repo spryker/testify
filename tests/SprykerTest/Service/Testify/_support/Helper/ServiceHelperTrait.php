@@ -11,9 +11,6 @@ use Codeception\Module;
 
 trait ServiceHelperTrait
 {
-    /**
-     * @return \SprykerTest\Service\Testify\Helper\ServiceHelper
-     */
     protected function getServiceHelper(): ServiceHelper
     {
         /** @var \SprykerTest\Service\Testify\Helper\ServiceHelper $serviceHelper */
@@ -22,10 +19,5 @@ trait ServiceHelperTrait
         return $serviceHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

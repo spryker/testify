@@ -19,11 +19,6 @@ class AbstractHelper extends Module
      */
     protected $formatter;
 
-    /**
-     * @param string $message
-     *
-     * @return string
-     */
     protected function format(string $message): string
     {
         $formatter = $this->getFormatter();
@@ -31,9 +26,6 @@ class AbstractHelper extends Module
         return $formatter->format($message);
     }
 
-    /**
-     * @return \Symfony\Component\Console\Formatter\OutputFormatter
-     */
     protected function getFormatter(): OutputFormatter
     {
         if ($this->formatter === null) {
@@ -78,11 +70,6 @@ class AbstractHelper extends Module
         $this->write("\n");
     }
 
-    /**
-     * @param string $message
-     *
-     * @return void
-     */
     protected function writeMissingHelperMessage(string $message): void
     {
         $this->writeln($message);

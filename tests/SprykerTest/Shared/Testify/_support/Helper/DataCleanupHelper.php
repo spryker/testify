@@ -21,21 +21,11 @@ class DataCleanupHelper extends Module
      */
     protected $cleanups = [];
 
-    /**
-     * @param \Closure $closure
-     *
-     * @return void
-     */
     public function _addCleanup(Closure $closure): void
     {
         $this->cleanups[] = $closure;
     }
 
-    /**
-     * @param \Closure $closure
-     *
-     * @return void
-     */
     public function addCleanup(Closure $closure): void
     {
         $this->_addCleanup($closure);
@@ -63,9 +53,6 @@ class DataCleanupHelper extends Module
         $this->cleanups = [];
     }
 
-    /**
-     * @return void
-     */
     protected function setDefaultConfig(): void
     {
         $this->config = ['cleanup' => true];

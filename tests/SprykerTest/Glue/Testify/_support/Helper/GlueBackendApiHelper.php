@@ -75,11 +75,6 @@ class GlueBackendApiHelper extends Module implements LastConnectionProviderInter
      */
     protected array $jsonApiResourcePlugins = [];
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->disableWhoopsErrorHandler();
@@ -96,9 +91,6 @@ class GlueBackendApiHelper extends Module implements LastConnectionProviderInter
         $this->getConfigHelper()->setConfig(ErrorHandlerConstants::IS_PRETTY_ERROR_HANDLER_ENABLED, false);
     }
 
-    /**
-     * @return void
-     */
     protected function reset(): void
     {
         $this->requestBuilder = null;
@@ -108,11 +100,6 @@ class GlueBackendApiHelper extends Module implements LastConnectionProviderInter
         $this->jsonApiResourcePlugins = [];
     }
 
-    /**
-     * @param \Spryker\Glue\GlueJsonApiConventionExtension\Dependency\Plugin\JsonApiResourceInterface $jsonApiResourcePlugin
-     *
-     * @return void
-     */
     public function addJsonApiResourcePlugin(JsonApiResourceInterface $jsonApiResourcePlugin): void
     {
         $this->jsonApiResourcePlugins[] = $jsonApiResourcePlugin;
@@ -244,9 +231,6 @@ class GlueBackendApiHelper extends Module implements LastConnectionProviderInter
         return $this->httpSender;
     }
 
-    /**
-     * @return \Spryker\Shared\Application\ApplicationInterface
-     */
     protected function getGlueBackendApiApplication(): ApplicationInterface
     {
         /** @var \Spryker\Glue\GlueApplication\GlueApplicationFactory $glueApplicationFactory */
@@ -314,11 +298,6 @@ class GlueBackendApiHelper extends Module implements LastConnectionProviderInter
         return $this->jsonApiResourcePlugins;
     }
 
-    /**
-     * @param int $code
-     *
-     * @return void
-     */
     public function seeResponseCodeIs(int $code): void
     {
         $failureMessage = sprintf(
@@ -329,17 +308,11 @@ class GlueBackendApiHelper extends Module implements LastConnectionProviderInter
         $this->assertSame($code, $this->getResponse()->getStatusCode(), $failureMessage);
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     protected function getResponse(): Response
     {
         return $this->getHttpSenderStub()->getResponse();
     }
 
-    /**
-     * @return void
-     */
     public function seeResponseIsJson(): void
     {
         $responseContent = $this->getResponse()->getContent();
@@ -347,12 +320,6 @@ class GlueBackendApiHelper extends Module implements LastConnectionProviderInter
         $this->decodeAndValidateJson($responseContent);
     }
 
-    /**
-     * @param string $jsonString
-     * @param string $errorFormat
-     *
-     * @return void
-     */
     protected function decodeAndValidateJson(string $jsonString, string $errorFormat = 'Invalid json: %s. System message: %s.'): void
     {
         json_decode($jsonString);
@@ -391,9 +358,6 @@ class GlueBackendApiHelper extends Module implements LastConnectionProviderInter
         return $this;
     }
 
-    /**
-     * @return \SprykerTest\Glue\Testify\Helper\Connection|null
-     */
     public function getLastConnection(): ?Connection
     {
         return $this->lastConnection;

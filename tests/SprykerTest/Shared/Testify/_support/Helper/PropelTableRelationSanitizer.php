@@ -13,12 +13,6 @@ use Propel\Runtime\Map\RelationMap;
 
 class PropelTableRelationSanitizer extends Module
 {
-    /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria $query
-     * @param array $processedEntities
-     *
-     * @return void
-     */
     public function truncateTableRelations(ModelCriteria $query, array $processedEntities = []): void
     {
         $relations = $query->getTableMap()->getRelations();

@@ -27,17 +27,11 @@ class FixturesCommand extends Run implements CustomCommandInterface
      */
     public const CODE_SUCCESS = 0;
 
-    /**
-     * @return string
-     */
     public static function getCommandName(): string
     {
         return 'fixtures';
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return 'Builds fixtures and serializes them into files';

@@ -19,19 +19,11 @@ class ReferenceResolver implements ReferenceResolverInterface
      */
     protected $containers = [];
 
-    /**
-     * @param \Spryker\Glue\Testify\OpenApi3\SchemaObject\AbstractObject $container
-     */
     public function __construct(AbstractObject $container)
     {
         $this->containers[''] = $container;
     }
 
-    /**
-     * @param string $reference
-     *
-     * @return \Spryker\Glue\Testify\OpenApi3\SchemaFieldInterface
-     */
     public function resolveReference(string $reference): SchemaFieldInterface
     {
         [$file, $path] = explode('#', $reference, 2);

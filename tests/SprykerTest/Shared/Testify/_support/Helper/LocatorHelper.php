@@ -31,9 +31,6 @@ class LocatorHelper extends Module
      */
     protected $configCache;
 
-    /**
-     * @return void
-     */
     public function _initialize(): void
     {
         Config::init();
@@ -41,9 +38,6 @@ class LocatorHelper extends Module
         $this->configCache = $reflectionProperty->getValue()->getArrayCopy();
     }
 
-    /**
-     * @return void
-     */
     protected function setDefaultConfig(): void
     {
         $this->config = [
@@ -86,9 +80,6 @@ class LocatorHelper extends Module
         $bundleProxyIsInstanceCacheEnabledPropertyReflection->setValue(null, true);
     }
 
-    /**
-     * @return \ReflectionProperty
-     */
     protected function getConfigReflectionProperty(): ReflectionProperty
     {
         $reflection = new ReflectionClass(Config::class);
@@ -112,9 +103,6 @@ class LocatorHelper extends Module
         $configProperty->setValue(null, $config);
     }
 
-    /**
-     * @return bool
-     */
     public function isProjectNamespaceEnabled(): bool
     {
         return $this->config['projectNamespaces'] !== [];
@@ -133,11 +121,6 @@ class LocatorHelper extends Module
         $this->configureNamespacesForClassResolver();
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->clearLocators();
@@ -146,9 +129,6 @@ class LocatorHelper extends Module
         $this->configureNamespacesForClassResolver();
     }
 
-    /**
-     * @return void
-     */
     protected function clearLocators(): void
     {
         $reflection = new ReflectionClass(AbstractLocatorLocator::class);
@@ -157,9 +137,6 @@ class LocatorHelper extends Module
         $instanceProperty->setValue(null, null);
     }
 
-    /**
-     * @return void
-     */
     protected function clearContainers(): void
     {
         $reflection = new ReflectionClass(BundleDependencyProviderResolverAwareTrait::class);
@@ -168,9 +145,6 @@ class LocatorHelper extends Module
         $instanceProperty->setValue(null, null);
     }
 
-    /**
-     * @return void
-     */
     protected function clearCaches(): void
     {
         $abstractClassResolverReflection = new ReflectionClass(AbstractClassResolver::class);
@@ -190,9 +164,6 @@ class LocatorHelper extends Module
         }
     }
 
-    /**
-     * @return void
-     */
     private function configureNamespacesForClassResolver(): void
     {
         $this->setConfig(KernelConstants::PROJECT_NAMESPACES, $this->config['projectNamespaces']);
@@ -221,11 +192,6 @@ class LocatorHelper extends Module
         return $this->getLocator()->$bundleName()->facade();
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void
     {
         $this->clearLocators();
@@ -233,9 +199,6 @@ class LocatorHelper extends Module
         $this->resetConfig();
     }
 
-    /**
-     * @return void
-     */
     private function resetConfig(): void
     {
         $reflectionProperty = $this->getConfigReflectionProperty();

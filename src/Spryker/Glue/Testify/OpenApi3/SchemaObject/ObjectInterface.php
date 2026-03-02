@@ -11,9 +11,6 @@ use Spryker\Glue\Testify\OpenApi3\SchemaFieldInterface;
 
 interface ObjectInterface extends SchemaFieldInterface
 {
-    /**
-     * @return \Spryker\Glue\Testify\OpenApi3\SchemaObject\ObjectSpecification
-     */
     public function getObjectSpecification(): ObjectSpecification;
 
     /**

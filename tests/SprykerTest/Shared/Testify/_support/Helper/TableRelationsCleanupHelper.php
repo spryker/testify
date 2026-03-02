@@ -13,22 +13,11 @@ use Propel\Runtime\Map\RelationMap;
 
 class TableRelationsCleanupHelper extends Module
 {
-    /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria $query
-     *
-     * @return void
-     */
     public function ensureDatabaseTableIsEmpty(ModelCriteria $query): void
     {
         $this->cleanTableRelations($query);
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria $query
-     * @param array $processedEntities
-     *
-     * @return void
-     */
     protected function cleanTableRelations(ModelCriteria $query, array $processedEntities = []): void
     {
         $relations = $query->getTableMap()->getRelations();

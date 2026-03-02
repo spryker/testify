@@ -44,9 +44,6 @@ abstract class AbstractConnection implements Connection
      */
     protected $responseContentType = 'application/json';
 
-    /**
-     * @inheritDoc
-     */
     public function getRequestUrl(): string
     {
         return $this->requestUrl;
@@ -64,9 +61,6 @@ abstract class AbstractConnection implements Connection
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getRequestMethod(): string
     {
         return $this->requestMethod;
@@ -126,9 +120,6 @@ abstract class AbstractConnection implements Connection
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getResponseBody(): string
     {
         return $this->responseBody;
@@ -146,9 +137,6 @@ abstract class AbstractConnection implements Connection
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getResponseCode(): int
     {
         return $this->responseCode;
@@ -166,9 +154,6 @@ abstract class AbstractConnection implements Connection
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getResponseContentType(): string
     {
         return $this->responseContentType;

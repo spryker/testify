@@ -11,9 +11,6 @@ use Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition;
 
 class SecurityRequirements extends AbstractCollection
 {
-    /**
-     * @inheritDoc
-     */
     public function getElementDefinition(): PropertyDefinition
     {
         return new PropertyDefinition(SecurityRequirement::class);

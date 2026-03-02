@@ -17,9 +17,6 @@ use Spryker\Glue\Testify\OpenApi3\SchemaObject\ObjectSpecification;
  */
 class Document extends AbstractObject
 {
-    /**
-     * @inheritDoc
-     */
     public function getObjectSpecification(): ObjectSpecification
     {
         return (new ObjectSpecification())

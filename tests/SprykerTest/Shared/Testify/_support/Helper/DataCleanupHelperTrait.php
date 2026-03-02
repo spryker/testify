@@ -11,9 +11,6 @@ use Codeception\Module;
 
 trait DataCleanupHelperTrait
 {
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
-     */
     protected function getDataCleanupHelper(): DataCleanupHelper
     {
         if (method_exists($this, 'hasModule') && !$this->hasModule('\\' . DataCleanupHelper::class)) {
@@ -26,10 +23,5 @@ trait DataCleanupHelperTrait
         return $dataCleanerHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

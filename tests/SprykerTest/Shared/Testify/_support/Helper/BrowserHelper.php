@@ -22,11 +22,6 @@ class BrowserHelper extends Module
      */
     protected $scenario;
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->scenario = $test->getScenario();

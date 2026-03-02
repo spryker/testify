@@ -24,10 +24,6 @@ class TestifyConfigurator implements TestifyConfiguratorInterface
      */
     protected $config;
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     * @param \Spryker\Shared\Testify\Config\TestifyConfigInterface $config
-     */
     public function __construct(Container $container, TestifyConfigInterface $config)
     {
         $this->container = $container;

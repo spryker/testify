@@ -9,11 +9,6 @@ namespace SprykerTest\Shared\Testify\Helper;
 
 trait SourceNamespaceTrait
 {
-    /**
-     * @param string $namespace
-     *
-     * @return string
-     */
     protected function removeTestSuffix(string $namespace): string
     {
         return preg_replace('#Test$#', '', $namespace);

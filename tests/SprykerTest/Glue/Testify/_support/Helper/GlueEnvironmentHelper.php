@@ -11,9 +11,6 @@ use SprykerTest\Shared\Testify\Helper\Environment;
 
 class GlueEnvironmentHelper extends Environment
 {
-    /**
-     * @return void
-     */
     public function _initialize(): void
     {
         defined('APPLICATION') || define('APPLICATION', 'GLUE');

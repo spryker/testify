@@ -17,9 +17,6 @@ use Spryker\Glue\Testify\OpenApi3\SchemaObject\ObjectSpecification;
  */
 class Foo extends AbstractObject implements ReferableInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function getObjectSpecification(): ObjectSpecification
     {
         return (new ObjectSpecification())

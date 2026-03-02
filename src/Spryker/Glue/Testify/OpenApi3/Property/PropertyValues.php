@@ -43,17 +43,11 @@ class PropertyValues implements IteratorAggregate, ArrayAccess, Countable
         return $this;
     }
 
-    /**
-     * @return \Traversable
-     */
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->properties);
     }
 
-    /**
-     * @return int
-     */
     public function count(): int
     {
         return count($this->properties);

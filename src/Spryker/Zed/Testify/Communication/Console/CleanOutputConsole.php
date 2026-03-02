@@ -21,9 +21,6 @@ class CleanOutputConsole extends Console
      */
     protected const COMMAND_NAME = 'testify:clean:output';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         $this
@@ -31,12 +28,6 @@ class CleanOutputConsole extends Console
             ->setDescription('Removes all files in test/_output directory.');
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $removedFiles = $this->getFacade()->cleanUpOutputDirectories();

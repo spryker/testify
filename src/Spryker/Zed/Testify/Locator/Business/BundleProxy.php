@@ -32,9 +32,6 @@ class BundleProxy extends KernelBundleProxy
      */
     protected $innerLocator;
 
-    /**
-     * @param \Spryker\Zed\Testify\Locator\Business\BusinessLocator $locator
-     */
     public function __construct(BusinessLocator $locator)
     {
         $this->innerLocator = $locator;

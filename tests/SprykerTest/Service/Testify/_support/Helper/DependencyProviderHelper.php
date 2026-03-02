@@ -76,19 +76,11 @@ class DependencyProviderHelper extends Module
         $this->containerGlobals->set($key, $value, $onlyFor);
     }
 
-    /**
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function getContainer(): ContainerInterface
     {
         return $this->getContainerHelper()->getContainer();
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Service\Kernel\Container
-     */
     public function getModuleContainer(?string $moduleName = null): Container
     {
         $container = new Container();
@@ -103,12 +95,6 @@ class DependencyProviderHelper extends Module
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Kernel\AbstractBundleDependencyProvider $dependencyProvider
-     * @param \Spryker\Service\Kernel\Container $container
-     *
-     * @return \Spryker\Service\Kernel\Container
-     */
     protected function provide(AbstractBundleDependencyProvider $dependencyProvider, Container $container): Container
     {
         return $dependencyProvider->provideServiceDependencies($container);
@@ -141,11 +127,6 @@ class DependencyProviderHelper extends Module
         return $this->dependencyProviderStub;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Service\Kernel\AbstractBundleDependencyProvider
-     */
     protected function createDependencyProvider(string $moduleName): AbstractBundleDependencyProvider
     {
         $dependencyProviderClassName = $this->getDependencyProviderClassName($moduleName);
@@ -153,11 +134,6 @@ class DependencyProviderHelper extends Module
         return new $dependencyProviderClassName();
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return string
-     */
     protected function getDependencyProviderClassName(string $moduleName): string
     {
         $config = Configuration::config();
@@ -173,11 +149,6 @@ class DependencyProviderHelper extends Module
         return sprintf(static::DEPENDENCY_PROVIDER_CLASS_NAME_PATTERN, $this->removeTestSuffix($namespaceParts[0]), $moduleName);
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void
     {
         $this->dependencyProviderStub = null;

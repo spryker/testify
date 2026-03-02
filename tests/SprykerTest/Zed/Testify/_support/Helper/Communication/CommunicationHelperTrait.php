@@ -11,9 +11,6 @@ use Codeception\Module;
 
 trait CommunicationHelperTrait
 {
-    /**
-     * @return \SprykerTest\Zed\Testify\Helper\Communication\CommunicationHelper
-     */
     protected function getCommunicationHelper(): CommunicationHelper
     {
         /** @var \SprykerTest\Zed\Testify\Helper\Communication\CommunicationHelper $factoryHelper */
@@ -22,10 +19,5 @@ trait CommunicationHelperTrait
         return $factoryHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

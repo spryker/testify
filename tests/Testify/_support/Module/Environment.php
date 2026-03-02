@@ -38,9 +38,6 @@ class Environment extends Module
         $this->initEnvironment();
     }
 
-    /**
-     * @return void
-     */
     private function initEnvironment(): void
     {
         $path = self::MODE_DEFAULT_ROOT;

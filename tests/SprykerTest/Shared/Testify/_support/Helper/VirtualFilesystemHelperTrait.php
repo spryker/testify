@@ -11,9 +11,6 @@ use Codeception\Module;
 
 trait VirtualFilesystemHelperTrait
 {
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\VirtualFilesystemHelper
-     */
     protected function getVirtualFilesystemHelper(): VirtualFilesystemHelper
     {
         /** @var \SprykerTest\Shared\Testify\Helper\VirtualFilesystemHelper $virtualFilesystemHelper */
@@ -22,10 +19,5 @@ trait VirtualFilesystemHelperTrait
         return $virtualFilesystemHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

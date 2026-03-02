@@ -11,10 +11,5 @@ use Codeception\Step;
 
 interface StepDescriptionExtender
 {
-    /**
-     * @param string $stepDescription
-     *
-     * @return \Codeception\Step
-     */
     public function setStepDescription(string $stepDescription): Step;
 }

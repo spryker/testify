@@ -23,9 +23,6 @@ use Spryker\Glue\Testify\OpenApi3\Reader\YamlFileReader;
  */
 class OpenApi3SchemaParserTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testYamlReaderReadsSchemaFromFile(): void
     {
         $reader = new YamlFileReader(__DIR__ . DIRECTORY_SEPARATOR . 'schema.yml');

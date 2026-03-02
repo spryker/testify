@@ -93,11 +93,6 @@ class ServiceHelper extends Module
         return $this->serviceStubs[$moduleName];
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Service\Kernel\AbstractService
-     */
     public function getService(?string $moduleName = null): AbstractService
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -111,12 +106,6 @@ class ServiceHelper extends Module
         return $this->serviceStubs[$moduleName];
     }
 
-    /**
-     * @param \Spryker\Service\Kernel\AbstractService $service
-     * @param string $moduleName
-     *
-     * @return \Spryker\Service\Kernel\AbstractService
-     */
     protected function injectFactory(AbstractService $service, string $moduleName): AbstractService
     {
         $service->setFactory($this->getFactory($moduleName));
@@ -124,11 +113,6 @@ class ServiceHelper extends Module
         return $service;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Service\Kernel\AbstractService
-     */
     protected function createService(string $moduleName): AbstractService
     {
         $className = $this->resolveClassName(static::SERVICE_CLASS_NAME_PATTERN, $moduleName);
@@ -166,11 +150,6 @@ class ServiceHelper extends Module
         return $this->factoryStubs[$moduleName];
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Service\Kernel\AbstractServiceFactory
-     */
     public function getFactory(?string $moduleName = null): AbstractServiceFactory
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -190,11 +169,6 @@ class ServiceHelper extends Module
         return $moduleFactory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Service\Kernel\AbstractServiceFactory
-     */
     protected function createFactory(string $moduleName): AbstractServiceFactory
     {
         $moduleFactoryClassName = $this->resolveClassName(static::SERVICE_FACTORY_CLASS_NAME_PATTERN, $moduleName);
@@ -202,12 +176,6 @@ class ServiceHelper extends Module
         return new $moduleFactoryClassName();
     }
 
-    /**
-     * @param \Spryker\Service\Kernel\AbstractServiceFactory $factory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Service\Kernel\AbstractServiceFactory
-     */
     protected function injectConfig(AbstractServiceFactory $factory, string $moduleName): AbstractServiceFactory
     {
         if (!$this->hasModule('\\' . ConfigHelper::class)) {
@@ -223,11 +191,6 @@ class ServiceHelper extends Module
         return $factory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Service\Kernel\AbstractBundleConfig|null
-     */
     protected function getConfig(string $moduleName): ?AbstractBundleConfig
     {
         try {
@@ -240,12 +203,6 @@ class ServiceHelper extends Module
         }
     }
 
-    /**
-     * @param \Spryker\Service\Kernel\AbstractServiceFactory $factory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Service\Kernel\AbstractServiceFactory
-     */
     protected function injectContainer(AbstractServiceFactory $factory, string $moduleName): AbstractServiceFactory
     {
         if ($this->hasModule('\\' . DependencyProviderHelper::class)) {
@@ -255,21 +212,11 @@ class ServiceHelper extends Module
         return $factory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Service\Kernel\Container
-     */
     protected function getContainer(string $moduleName): Container
     {
         return $this->getDependencyProviderHelper()->getModuleContainer($moduleName);
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->factoryStubs = [];

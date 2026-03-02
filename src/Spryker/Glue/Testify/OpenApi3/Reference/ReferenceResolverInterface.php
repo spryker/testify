@@ -11,10 +11,5 @@ use Spryker\Glue\Testify\OpenApi3\SchemaFieldInterface;
 
 interface ReferenceResolverInterface
 {
-    /**
-     * @param string $reference
-     *
-     * @return \Spryker\Glue\Testify\OpenApi3\SchemaFieldInterface
-     */
     public function resolveReference(string $reference): SchemaFieldInterface;
 }

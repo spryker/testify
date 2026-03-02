@@ -70,9 +70,6 @@ abstract class AbstractDependencyProviderHelper extends Module
         $this->containerGlobals->set($key, $value, $onlyFor);
     }
 
-    /**
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function getContainer(): ContainerInterface
     {
         return $this->getContainerHelper()->getContainer();
@@ -108,12 +105,6 @@ abstract class AbstractDependencyProviderHelper extends Module
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\AbstractBundleDependencyProvider $dependencyProvider
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     abstract protected function provide(AbstractBundleDependencyProvider $dependencyProvider, Container $container): Container;
 
     /**
@@ -143,29 +134,16 @@ abstract class AbstractDependencyProviderHelper extends Module
         return $this->dependencyProviderStub;
     }
 
-    /**
-     * @return void
-     */
     public function cleanUp(): void
     {
         $this->cleanupStaticCache(AbstractFactory::class, 'containers');
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->cleanupStaticCache(AbstractFactory::class, 'containers');
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void
     {
         $this->dependencyProviderStub = null;

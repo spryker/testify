@@ -52,9 +52,6 @@ class ObjectSpecification implements IteratorAggregate, ArrayAccess, Countable
         return new ArrayIterator($this->properties);
     }
 
-    /**
-     * @return int
-     */
     public function count(): int
     {
         return count($this->properties);

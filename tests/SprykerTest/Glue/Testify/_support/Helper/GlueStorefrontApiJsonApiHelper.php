@@ -75,9 +75,6 @@ class GlueStorefrontApiJsonApiHelper extends AbstractJsonApiHelper
      */
     protected const DEFAULT_LANGUAGE = 'en';
 
-    /**
-     * @return void
-     */
     protected function prepareHeaders(): void
     {
         $this->startFollowingRedirects();
@@ -93,9 +90,6 @@ class GlueStorefrontApiJsonApiHelper extends AbstractJsonApiHelper
         $this->haveHttpHeader(static::HEADER_STORE_NAME, static::DEFAULT_STORE_NAME);
     }
 
-    /**
-     * @return string
-     */
     protected function getApplicationDomain(): string
     {
         return Config::get(TestifyConstants::GLUE_STOREFRONT_API_DOMAIN);

@@ -17,9 +17,6 @@ class JsonFileReader implements ReaderInterface
      */
     protected $fileName;
 
-    /**
-     * @param string $fileName
-     */
     public function __construct(string $fileName)
     {
         $this->fileName = $fileName;

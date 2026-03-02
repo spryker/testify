@@ -22,9 +22,6 @@ class JsonPath extends Module
     use LastConnectionConsumerTrait;
     use AssertArraySubsetTrait;
 
-    /**
-     * @inheritDoc
-     */
     public function _initialize(): void
     {
         parent::_initialize();
@@ -52,11 +49,6 @@ class JsonPath extends Module
         return $this;
     }
 
-    /**
-     * @param string $jsonPath
-     *
-     * @return void
-     */
     public function seeResponseMatchesJsonPath(string $jsonPath): void
     {
         $this->assertNotEmpty(
@@ -65,11 +57,6 @@ class JsonPath extends Module
         );
     }
 
-    /**
-     * @param string $jsonPath
-     *
-     * @return void
-     */
     public function dontSeeResponseMatchesJsonPath(string $jsonPath): void
     {
         $this->assertEmpty(
@@ -78,12 +65,6 @@ class JsonPath extends Module
         );
     }
 
-    /**
-     * @param array $jsonType
-     * @param string $jsonPath
-     *
-     * @return void
-     */
     public function seeResponseJsonPathMatchesJsonType(array $jsonType, string $jsonPath = '$'): void
     {
         Assert::assertThat(
@@ -92,12 +73,6 @@ class JsonPath extends Module
         );
     }
 
-    /**
-     * @param array $subArray
-     * @param string $jsonPath
-     *
-     * @return void
-     */
     public function seeResponseJsonPathContains(array $subArray, string $jsonPath = '$'): void
     {
         $foundSegments = (new JsonObject($this->getJsonLastConnection()->getResponseJson()))->get($jsonPath);

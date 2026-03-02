@@ -16,9 +16,6 @@ use Spryker\Zed\Testify\Business\Cleanup\OutputDirectoryCleanerInterface;
  */
 class TestifyBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \Spryker\Zed\Testify\Business\Cleanup\OutputDirectoryCleanerInterface
-     */
     public function createOutputCleaner(): OutputDirectoryCleanerInterface
     {
         return new OutputDirectoryCleaner($this->getConfig()->getOutputDirectoriesForCleanup());

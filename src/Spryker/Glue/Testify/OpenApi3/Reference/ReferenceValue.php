@@ -28,11 +28,6 @@ class ReferenceValue implements PropertyValueInterface
      */
     protected $resolver;
 
-    /**
-     * @param \Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition $definition
-     * @param string $reference
-     * @param \Spryker\Glue\Testify\OpenApi3\Reference\ReferenceResolverInterface $resolver
-     */
     public function __construct(
         PropertyDefinition $definition,
         string $reference,
@@ -43,25 +38,16 @@ class ReferenceValue implements PropertyValueInterface
         $this->resolver = $resolver;
     }
 
-    /**
-     * @return \Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition
-     */
     public function getDefinition(): PropertyDefinition
     {
         return $this->definition;
     }
 
-    /**
-     * @return string
-     */
     public function getReference(): string
     {
         return $this->reference;
     }
 
-    /**
-     * @return \Spryker\Glue\Testify\OpenApi3\SchemaFieldInterface
-     */
     public function getValue(): SchemaFieldInterface
     {
         $value = $this->resolver->resolveReference($this->reference);

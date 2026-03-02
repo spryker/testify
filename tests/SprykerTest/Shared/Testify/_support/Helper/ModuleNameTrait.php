@@ -11,11 +11,6 @@ use Codeception\Configuration;
 
 trait ModuleNameTrait
 {
-    /**
-     * @param string|null $moduleName
-     *
-     * @return string
-     */
     protected function getModuleName(?string $moduleName = null): string
     {
         if ($moduleName) {

@@ -22,9 +22,6 @@ trait DependencyHelperTrait
         $this->getDependencyHelper()->setDependency($key, $value);
     }
 
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\DependencyHelper
-     */
     protected function getDependencyHelper(): DependencyHelper
     {
         /** @var \SprykerTest\Shared\Testify\Helper\DependencyHelper $dependencyHelper */
@@ -33,10 +30,5 @@ trait DependencyHelperTrait
         return $dependencyHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

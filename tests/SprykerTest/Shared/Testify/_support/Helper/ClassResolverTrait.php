@@ -25,13 +25,6 @@ trait ClassResolverTrait
         'SprykerFeature',
     ];
 
-    /**
-     * @param string $classNamePattern
-     * @param string $moduleName
-     * @param string|null $applicationName
-     *
-     * @return object|null
-     */
     protected function resolveClass(string $classNamePattern, string $moduleName, ?string $applicationName = null): ?object
     {
         $resolvedClassName = $this->resolveClassName($classNamePattern, $moduleName, $applicationName);
@@ -43,13 +36,6 @@ trait ClassResolverTrait
         return new $resolvedClassName();
     }
 
-    /**
-     * @param string $classNamePattern
-     * @param string $moduleName
-     * @param string|null $applicationName
-     *
-     * @return string|null
-     */
     protected function resolveClassName(string $classNamePattern, string $moduleName, ?string $applicationName = null): ?string
     {
         $classNameCandidates = $this->getClassNameCandidates($classNamePattern, $moduleName, $applicationName);
@@ -98,12 +84,6 @@ trait ClassResolverTrait
         return $classNameCandidates;
     }
 
-    /**
-     * @param string $classNamePattern
-     * @param string $moduleName
-     *
-     * @return string
-     */
     protected function getClassNameFromConfiguration(string $classNamePattern, string $moduleName): string
     {
         $config = Configuration::config();
@@ -116,11 +96,6 @@ trait ClassResolverTrait
         return sprintf($classNamePattern, $this->trimTestNamespacePostfix($organization), $application, $moduleName);
     }
 
-    /**
-     * @param string $namespacePart
-     *
-     * @return string
-     */
     protected function trimTestNamespacePostfix(string $namespacePart): string
     {
         return preg_replace('/Test$/', '', $namespacePart);

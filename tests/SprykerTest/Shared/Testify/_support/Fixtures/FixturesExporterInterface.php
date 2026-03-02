@@ -9,10 +9,5 @@ namespace SprykerTest\Shared\Testify\Fixtures;
 
 interface FixturesExporterInterface
 {
-    /**
-     * @param \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface $fixture
-     *
-     * @return void
-     */
     public function exportFixtures(FixturesContainerInterface $fixture): void;
 }

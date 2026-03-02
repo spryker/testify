@@ -75,9 +75,6 @@ class GlueBackendApiJsonApiHelper extends AbstractJsonApiHelper
      */
     protected const DEFAULT_LANGUAGE = 'en';
 
-    /**
-     * @return void
-     */
     protected function prepareHeaders(): void
     {
         $this->startFollowingRedirects();
@@ -91,9 +88,6 @@ class GlueBackendApiJsonApiHelper extends AbstractJsonApiHelper
         }
     }
 
-    /**
-     * @return string
-     */
     protected function getApplicationDomain(): string
     {
         return Config::get(TestifyConstants::GLUE_BACKEND_API_DOMAIN);

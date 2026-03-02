@@ -13,9 +13,6 @@ use Spryker\Glue\Testify\OpenApi3\SchemaObject\PathItem;
 
 class Callback extends AbstractCollection implements ReferableInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function getElementDefinition(): PropertyDefinition
     {
         return new PropertyDefinition(PathItem::class);

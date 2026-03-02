@@ -35,11 +35,6 @@ trait ModuleLocatorTrait
         return $module;
     }
 
-    /**
-     * @param string $className
-     *
-     * @return \Codeception\Module|null
-     */
     public function findModule(string $className): ?Module
     {
         foreach ($this->getModules() as $module) {

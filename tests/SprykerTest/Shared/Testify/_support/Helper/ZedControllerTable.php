@@ -23,9 +23,6 @@ class ZedControllerTable extends Module implements DependsOnModule
      */
     protected $currentData = [];
 
-    /**
-     * @return array
-     */
     public function _depends(): array
     {
         return [
@@ -33,21 +30,11 @@ class ZedControllerTable extends Module implements DependsOnModule
         ];
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->currentData = [];
     }
 
-    /**
-     * @param \SprykerTest\Shared\Testify\Helper\ZedBootstrap $bootstrap
-     *
-     * @return void
-     */
     public function _inject(ZedBootstrap $bootstrap): void
     {
         $this->zedBootstrap = $bootstrap;
@@ -67,9 +54,6 @@ class ZedControllerTable extends Module implements DependsOnModule
         $this->currentData = json_decode($response->getContent(), true);
     }
 
-    /**
-     * @return void
-     */
     public function seeDataTable(): void
     {
         if (!isset($this->currentData['recordsTotal'])) {
@@ -77,11 +61,6 @@ class ZedControllerTable extends Module implements DependsOnModule
         }
     }
 
-    /**
-     * @param int $num
-     *
-     * @return void
-     */
     public function seeNumRecordsInTable(int $num): void
     {
         if (!isset($this->currentData['recordsTotal'])) {
@@ -90,12 +69,6 @@ class ZedControllerTable extends Module implements DependsOnModule
         $this->assertSame($num, $this->currentData['recordsTotal'], 'records in table');
     }
 
-    /**
-     * @param int $row
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function seeInTable(int $row, array $expectedRow): void
     {
         if (!isset($this->currentData['data'])) {
@@ -115,42 +88,21 @@ class ZedControllerTable extends Module implements DependsOnModule
         );
     }
 
-    /**
-     * @param int $rowPosition
-     *
-     * @return void
-     */
     public function clickDataTableEditButton(int $rowPosition = 0): void
     {
         $this->clickDataTableButton('Edit', $rowPosition);
     }
 
-    /**
-     * @param int $rowPosition
-     *
-     * @return void
-     */
     public function clickDataTableViewButton(int $rowPosition = 0): void
     {
         $this->clickDataTableButton('View', $rowPosition);
     }
 
-    /**
-     * @param int $rowPosition
-     *
-     * @return void
-     */
     public function clickDataTableDeleteButton(int $rowPosition = 0): void
     {
         $this->clickDataTableButton('Delete', $rowPosition);
     }
 
-    /**
-     * @param string $name
-     * @param int $rowPosition
-     *
-     * @return void
-     */
     public function clickDataTableButton(string $name, int $rowPosition = 0): void
     {
         if (!isset($this->currentData['data'])) {
@@ -195,11 +147,6 @@ class ZedControllerTable extends Module implements DependsOnModule
         $this->fail(sprintf('Couldn\'t find "%s" link in row "%d"', $name, $rowPosition));
     }
 
-    /**
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function seeInLastRow(array $expectedRow): void
     {
         if (!isset($this->currentData['data'])) {
@@ -210,22 +157,11 @@ class ZedControllerTable extends Module implements DependsOnModule
         $this->seeInTable($rowNum, $expectedRow);
     }
 
-    /**
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function seeInFirstRow(array $expectedRow): void
     {
         $this->seeInTable(0, $expectedRow);
     }
 
-    /**
-     * @param int $row
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function dontSeeInTable(int $row, array $expectedRow): void
     {
         if (!isset($this->currentData['data'])) {
@@ -249,11 +185,6 @@ class ZedControllerTable extends Module implements DependsOnModule
         );
     }
 
-    /**
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function dontSeeInLastRow(array $expectedRow): void
     {
         if (!isset($this->currentData['data'])) {
@@ -266,11 +197,6 @@ class ZedControllerTable extends Module implements DependsOnModule
         $this->dontSeeInTable($rowNum, $expectedRow);
     }
 
-    /**
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function dontSeeInFirstRow(array $expectedRow): void
     {
         $this->dontSeeInTable(0, $expectedRow);

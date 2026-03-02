@@ -63,12 +63,6 @@ class FactoryHelper extends Module
         return $factoryStubs;
     }
 
-    /**
-     * @param string|null $moduleName
-     * @param string|null $applicationNamespace
-     *
-     * @return \Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory
-     */
     public function getPersistenceFactory(?string $moduleName = null, ?string $applicationNamespace = null): AbstractPersistenceFactory
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -82,12 +76,6 @@ class FactoryHelper extends Module
         return $this->injectConfig($persistenceFactory, $moduleName);
     }
 
-    /**
-     * @param string $moduleName
-     * @param string|null $applicationNamespace
-     *
-     * @return \Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory
-     */
     protected function createPersistenceFactory(string $moduleName, ?string $applicationNamespace = null): AbstractPersistenceFactory
     {
         $persistenceFactoryClassName = $this->getPersistenceFactoryClassName($moduleName, $applicationNamespace);
@@ -95,23 +83,11 @@ class FactoryHelper extends Module
         return new $persistenceFactoryClassName();
     }
 
-    /**
-     * @param string $moduleName
-     * @param string|null $applicationNamespace
-     *
-     * @return string
-     */
     protected function getPersistenceFactoryClassName(string $moduleName, ?string $applicationNamespace = null): string
     {
         return sprintf(static::PERSISTENCE_FACTORY_CLASS_NAME_PATTERN, $applicationNamespace ?: 'Spryker', $moduleName);
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory $persistenceFactory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory
-     */
     protected function injectConfig(AbstractPersistenceFactory $persistenceFactory, string $moduleName): AbstractPersistenceFactory
     {
         if (method_exists($persistenceFactory, 'setConfig') && $this->hasModule('\\' . ConfigHelper::class)) {
@@ -134,9 +110,6 @@ class FactoryHelper extends Module
         return $config;
     }
 
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\ConfigHelper
-     */
     protected function getConfigHelper(): ConfigHelper
     {
         /** @var \SprykerTest\Shared\Testify\Helper\ConfigHelper $configHelper */
@@ -145,11 +118,6 @@ class FactoryHelper extends Module
         return $configHelper;
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->factoryStubs = [];

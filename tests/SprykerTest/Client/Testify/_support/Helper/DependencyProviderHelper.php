@@ -91,11 +91,6 @@ class DependencyProviderHelper extends Module
         return $this->dependencyProviderStub;
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     public function getModuleContainer(?string $moduleName = null): Container
     {
         $container = new Container();
@@ -113,11 +108,6 @@ class DependencyProviderHelper extends Module
         return $container;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Client\Kernel\AbstractDependencyProvider
-     */
     protected function createDependencyProvider(string $moduleName): AbstractDependencyProvider
     {
         $dependencyProviderClassName = $this->resolveClassName(static::DEPENDENCY_PROVIDER_CLASS_NAME_PATTERN, $moduleName);
@@ -125,11 +115,6 @@ class DependencyProviderHelper extends Module
         return new $dependencyProviderClassName();
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->dependencyProviderStub = null;

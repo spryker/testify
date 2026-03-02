@@ -43,9 +43,6 @@ trait StaticVariablesHelper
         $propertyReflection->setValue(null, $value);
     }
 
-    /**
-     * @return void
-     */
     protected function resetStaticCaches(): void
     {
         foreach ($this->staticDefinitions as $staticDefinition) {

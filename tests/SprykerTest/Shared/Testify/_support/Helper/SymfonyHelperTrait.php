@@ -11,9 +11,6 @@ use Codeception\Module;
 
 trait SymfonyHelperTrait
 {
-    /**
-     * @return \SprykerTest\Shared\Testify\Helper\SymfonyHelper
-     */
     protected function getSymfonyHelper(): SymfonyHelper
     {
         /** @var \SprykerTest\Shared\Testify\Helper\SymfonyHelper $symfonyHelper */
@@ -22,10 +19,5 @@ trait SymfonyHelperTrait
         return $symfonyHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

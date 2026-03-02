@@ -60,9 +60,6 @@ trait StepOverrideTrait
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function getScenario(): Scenario
     {
         return $this->stepOverrider ?? parent::getScenario();

@@ -22,9 +22,6 @@ use Spryker\Glue\Testify\OpenApi3\Reference\ReferableInterface;
  */
 class Link extends AbstractObject implements ReferableInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function getObjectSpecification(): ObjectSpecification
     {
         return (new ObjectSpecification())

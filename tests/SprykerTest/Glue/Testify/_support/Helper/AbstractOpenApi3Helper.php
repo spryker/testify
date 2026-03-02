@@ -47,14 +47,8 @@ EOF;
      */
     protected $schema;
 
-    /**
-     * @return string
-     */
     abstract protected function getOpenApiSchemaFilePath(): string;
 
-    /**
-     * @inheritDoc
-     */
     public function _initialize(): void
     {
         parent::_initialize();
@@ -106,9 +100,6 @@ EOF;
         $validator->validate($responseData, $responseSchema, Constraint::CHECK_MODE_EXCEPTIONS);
     }
 
-    /**
-     * @return void
-     */
     protected function setDefaultConfig(): void
     {
         $this->config = [
@@ -222,22 +213,11 @@ EOF;
         ));
     }
 
-    /**
-     * @param string $url
-     *
-     * @return string
-     */
     protected function getUrlWithoutQuery(string $url): string
     {
         return rtrim(strtok(parse_url($url, PHP_URL_PATH), '?'), '/');
     }
 
-    /**
-     * @param string $path
-     * @param string $url
-     *
-     * @return bool
-     */
     protected function isPathMatchesUrl(string $path, string $url): bool
     {
         $pathTemplate = '#^' . preg_replace('/\{[^\}]+\}/m', '[^/]*', $path) . '((\?.*)|)$#';

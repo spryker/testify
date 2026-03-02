@@ -18,9 +18,6 @@ use Spryker\Glue\Testify\OpenApi3\Reference\ReferableInterface;
  */
 class Header extends AbstractObject implements ReferableInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function getObjectSpecification(): ObjectSpecification
     {
         return (new ObjectSpecification())

@@ -15,11 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class RequestBuilderStub extends RequestBuilder
 {
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return void
-     */
     public function setRequest(Request $request): void
     {
         $this->request = $request;

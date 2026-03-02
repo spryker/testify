@@ -72,11 +72,6 @@ class CommunicationHelper extends Module
         return $this->factoryStubs[$moduleName];
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory
-     */
     public function getFactory(?string $moduleName = null): AbstractCommunicationFactory
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -96,11 +91,6 @@ class CommunicationHelper extends Module
         return $moduleFactory;
     }
 
-    /**
-     * @param string|null $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory
-     */
     protected function createFactory(?string $moduleName = null): AbstractCommunicationFactory
     {
         $moduleName = $this->getModuleName($moduleName);
@@ -130,11 +120,6 @@ class CommunicationHelper extends Module
         return $moduleFactory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\AbstractBundleConfig|null
-     */
     protected function getConfig(string $moduleName): ?AbstractBundleConfig
     {
         try {
@@ -147,12 +132,6 @@ class CommunicationHelper extends Module
         }
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory $factory
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory
-     */
     protected function injectContainer(AbstractCommunicationFactory $factory, string $moduleName): AbstractCommunicationFactory
     {
         if ($this->hasModule('\\' . DependencyProviderHelper::class)) {
@@ -162,21 +141,11 @@ class CommunicationHelper extends Module
         return $factory;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function getContainer(string $moduleName): Container
     {
         return $this->getDependencyProviderHelper()->getModuleContainer($moduleName);
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->factoryStubs = [];

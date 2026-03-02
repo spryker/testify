@@ -21,11 +21,6 @@ class TableHelper extends Module
      */
     protected $currentData = [];
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->currentData = [];
@@ -47,9 +42,6 @@ class TableHelper extends Module
         $this->currentData = json_decode($response->getContent(), true);
     }
 
-    /**
-     * @return void
-     */
     public function seeDataTable(): void
     {
         if (!isset($this->currentData['recordsTotal'])) {
@@ -57,11 +49,6 @@ class TableHelper extends Module
         }
     }
 
-    /**
-     * @param int $num
-     *
-     * @return void
-     */
     public function seeNumRecordsInTable(int $num): void
     {
         if (!isset($this->currentData['recordsTotal'])) {
@@ -70,12 +57,6 @@ class TableHelper extends Module
         $this->assertSame($num, $this->currentData['recordsTotal'], 'records in table');
     }
 
-    /**
-     * @param int $row
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function seeInTable(int $row, array $expectedRow): void
     {
         if (!isset($this->currentData['data'])) {
@@ -95,42 +76,21 @@ class TableHelper extends Module
         );
     }
 
-    /**
-     * @param int $rowPosition
-     *
-     * @return void
-     */
     public function clickDataTableEditButton(int $rowPosition = 0): void
     {
         $this->clickDataTableButton('Edit', $rowPosition);
     }
 
-    /**
-     * @param int $rowPosition
-     *
-     * @return void
-     */
     public function clickDataTableViewButton(int $rowPosition = 0): void
     {
         $this->clickDataTableButton('View', $rowPosition);
     }
 
-    /**
-     * @param int $rowPosition
-     *
-     * @return void
-     */
     public function clickDataTableDeleteButton(int $rowPosition = 0): void
     {
         $this->clickDataTableButton('Delete', $rowPosition);
     }
 
-    /**
-     * @param string $name
-     * @param int $rowPosition
-     *
-     * @return void
-     */
     public function clickDataTableButton(string $name, int $rowPosition = 0): void
     {
         $dataSet = $this->currentData['data'] ?? null;
@@ -164,11 +124,6 @@ class TableHelper extends Module
         $this->getApplicationHelper()->seeResponseCodeIs(200);
     }
 
-    /**
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function seeInLastRow(array $expectedRow): void
     {
         if (!isset($this->currentData['data'])) {
@@ -179,22 +134,11 @@ class TableHelper extends Module
         $this->seeInTable($rowNum, $expectedRow);
     }
 
-    /**
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function seeInFirstRow(array $expectedRow): void
     {
         $this->seeInTable(0, $expectedRow);
     }
 
-    /**
-     * @param int $row
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function dontSeeInTable(int $row, array $expectedRow): void
     {
         if (!isset($this->currentData['data'])) {
@@ -218,11 +162,6 @@ class TableHelper extends Module
         );
     }
 
-    /**
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function dontSeeInLastRow(array $expectedRow): void
     {
         if (!isset($this->currentData['data'])) {
@@ -235,11 +174,6 @@ class TableHelper extends Module
         $this->dontSeeInTable($rowNum, $expectedRow);
     }
 
-    /**
-     * @param array $expectedRow
-     *
-     * @return void
-     */
     public function dontSeeInFirstRow(array $expectedRow): void
     {
         $this->dontSeeInTable(0, $expectedRow);
