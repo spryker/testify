@@ -10,7 +10,9 @@ declare(strict_types=1);
 namespace SprykerTest\Shared\Testify\Helper\Kernel;
 
 use Spryker\Service\Container\ContainerDelegator;
+use Spryker\Service\Container\Pass\SprykerDefaultsPass;
 use Spryker\Shared\Application\Kernel as BaseKernel;
+use SprykerTest\ApiPlatform\DependencyInjection\Compiler\DisableCacheWarmingPass;
 use SprykerTest\ApiPlatform\Test\TestModeConfiguration;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -122,8 +124,12 @@ class TestKernel extends BaseKernel
         foreach ($this->bundleConfigurations as $bundleName => $configuration) {
             $container->loadFromExtension($bundleName, $configuration);
         }
+    }
 
-        $container->setParameter('kernel.bundles', $this->bundleClasses);
+    protected function build(ContainerBuilder $container): void
+    {
+        $container->addCompilerPass(new DisableCacheWarmingPass());
+        $container->addCompilerPass(new SprykerDefaultsPass());
     }
 
     public static function getCacheDirPath(string $moduleRoot): string
