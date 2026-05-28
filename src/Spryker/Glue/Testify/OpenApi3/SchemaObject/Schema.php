@@ -15,6 +15,7 @@ use Spryker\Glue\Testify\OpenApi3\Primitive\FloatPrimitive;
 use Spryker\Glue\Testify\OpenApi3\Primitive\IntPrimitive;
 use Spryker\Glue\Testify\OpenApi3\Primitive\StringEnumeration;
 use Spryker\Glue\Testify\OpenApi3\Primitive\StringPrimitive;
+use Spryker\Glue\Testify\OpenApi3\Primitive\TypePrimitive;
 use Spryker\Glue\Testify\OpenApi3\Property\PropertyDefinition;
 use Spryker\Glue\Testify\OpenApi3\Reference\ReferableInterface;
 
@@ -35,7 +36,7 @@ use Spryker\Glue\Testify\OpenApi3\Reference\ReferableInterface;
  * @property-read int $minProperties
  * @property-read array<string> $required
  * @property-read array $enum
- * @property-read string $type
+ * @property-read string|array<string> $type
  * @property-read \Spryker\Glue\Testify\OpenApi3\Collection\Schemas $allOf
  * @property-read \Spryker\Glue\Testify\OpenApi3\Collection\Schemas $oneOf
  * @property-read \Spryker\Glue\Testify\OpenApi3\Collection\Schemas $anyOf
@@ -76,7 +77,7 @@ class Schema extends AbstractObject implements ReferableInterface
             ->setProperty('minProperties', new PropertyDefinition(IntPrimitive::class))
             ->setProperty('required', new PropertyDefinition(StringEnumeration::class))
             ->setProperty('enum', new PropertyDefinition(Enumeration::class))
-            ->setProperty('type', new PropertyDefinition(StringPrimitive::class))
+            ->setProperty('type', new PropertyDefinition(TypePrimitive::class))
             ->setProperty('allOf', new PropertyDefinition(Schemas::class))
             ->setProperty('oneOf', new PropertyDefinition(Schemas::class))
             ->setProperty('anyOf', new PropertyDefinition(Schemas::class))
