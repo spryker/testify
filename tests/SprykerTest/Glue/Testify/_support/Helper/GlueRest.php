@@ -9,6 +9,7 @@ namespace SprykerTest\Glue\Testify\Helper;
 
 use Codeception\Exception\ModuleException;
 use Codeception\Module\REST;
+use Codeception\TestInterface;
 use Codeception\Util\HttpCode;
 use JsonPath\JsonObject;
 use Spryker\Shared\Config\Config;
@@ -34,9 +35,35 @@ class GlueRest extends REST implements LastConnectionProviderInterface
      */
     protected $lastConnection;
 
+    /**
+     * Lower-cased names of default headers a test has opted out of for the current scenario.
+     *
+     * @var array<string, bool>
+     */
+    protected array $suppressedDefaultHeaders = [];
+
     public function _initialize(): void
     {
         parent::_initialize();
+    }
+
+    public function _before(TestInterface $test): void
+    {
+        parent::_before($test);
+
+        $this->suppressedDefaultHeaders = [];
+    }
+
+    /**
+     * Opt out of a default header that {@see static::prepareHeaders()} stamps onto every request
+     * (e.g. `Content-Type`, `Accept`). Tests that do not call this keep the default headers
+     * unchanged. Used to reproduce clients that omit a header the legacy Glue stack tolerated.
+     *
+     * @part json
+     */
+    public function dontSendDefaultHeader(string $name): void
+    {
+        $this->suppressedDefaultHeaders[strtolower($name)] = true;
     }
 
     public function getLastConnection(): ?Connection
@@ -576,13 +603,25 @@ class GlueRest extends REST implements LastConnectionProviderInterface
     protected function prepareHeaders(): self
     {
         $this->startFollowingRedirects();
-        $this->haveHttpHeader('X-Requested-With', 'Codeception');
-        $this->haveHttpHeader('Content-Type', 'application/vnd.api+json');
-        $this->haveHttpHeader('Accept', '*/*');
-        $this->haveHttpHeader('Accept-Language', 'en_US');
-        $this->haveHttpHeader('Store', 'DE');
+        $this->haveDefaultHeader('X-Requested-With', 'Codeception');
+        $this->haveDefaultHeader('Content-Type', 'application/vnd.api+json');
+        $this->haveDefaultHeader('Accept', '*/*');
+        $this->haveDefaultHeader('Accept-Language', 'en_US');
+        $this->haveDefaultHeader('Store', 'DE');
 
         return $this;
+    }
+
+    /**
+     * Sets a default header unless the test opted out of it via {@see static::dontSendDefaultHeader()}.
+     */
+    protected function haveDefaultHeader(string $name, string $value): void
+    {
+        if (isset($this->suppressedDefaultHeaders[strtolower($name)])) {
+            return;
+        }
+
+        $this->haveHttpHeader($name, $value);
     }
 
     /**
