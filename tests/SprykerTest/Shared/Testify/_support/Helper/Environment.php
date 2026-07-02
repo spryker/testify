@@ -77,6 +77,12 @@ class Environment extends Module
         $defaultFileContent = sprintf('<?php return "%s";', $this->config['defaultStore'] ?? 'DE');
         $pathToFile = $this->getRootDirectory() . 'config/Shared/default_store.php';
 
+        // Only seed a default when none exists (standalone module repo). Never overwrite an
+        // existing project file — isolated-module tests must not clobber the suite's real config.
+        if (file_exists($pathToFile)) {
+            return;
+        }
+
         if (!file_exists(dirname($pathToFile))) {
             mkdir(dirname($pathToFile), 0777, true);
         }
@@ -98,6 +104,14 @@ class Environment extends Module
 
         $storesFileContent = sprintf('<?php return %s;', var_export($storeConfiguration, true));
         $pathToFile = $this->getRootDirectory() . 'config/Shared/stores.php';
+
+        // Only seed a default when none exists (standalone module repo). Never overwrite an
+        // existing project file — otherwise an isolated-module suite running inside the suite
+        // clobbers the real multi-store config/Shared/stores.php for every later process, which
+        // breaks the dynamic-store-OFF currency lookup.
+        if (file_exists($pathToFile)) {
+            return;
+        }
 
         if (!file_exists(dirname($pathToFile))) {
             mkdir(dirname($pathToFile), 0777, true);
