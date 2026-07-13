@@ -78,6 +78,8 @@ class RunFilteredCommand extends Run implements CustomCommandInterface
         array $filterAppSuites = [],
         array $filterSuitesByWildcard = []
     ): void {
+        $isTopLevel = !$this->appFilterApplied;
+
         if (!$this->appFilterApplied) {
             $this->appFilterApplied = true;
             $suites = $this->selectApps($suites);
@@ -116,6 +118,18 @@ class RunFilteredCommand extends Run implements CustomCommandInterface
             if (!empty($config['include'])) {
                 $this->runIncludedSuites($config['include'], $currentDir);
             }
+        }
+
+        // Iterating included apps above switches the active config to each app in
+        // turn, so after the loop it points at the last app visited. The RunFailed
+        // extension registered its `failed` group against the root output dir at
+        // load time, but writes tests/_output/failed relative to the *active*
+        // config when RESULT_PRINT_AFTER fires. Restore the root config at the top
+        // level so the failed list lands where the group — and the `-g failed`
+        // rerun — read it, not under the last app's _output. $parentDir is the
+        // project root here (Configuration::projectDir() drifts once apps load).
+        if ($isTopLevel) {
+            Configuration::config($parentDir);
         }
     }
 
