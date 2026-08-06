@@ -84,4 +84,29 @@ class TestifyConstants
      * @var string
      */
     public const GLUE_STOREFRONT_API_OPEN_API_SCHEMA = 'TESTIFY:GLUE_STOREFRONT_API_OPEN_API_SCHEMA';
+
+    /**
+     * Specification:
+     * - Defines whether a data builder rule is executed as PHP code with `eval()`.
+     * - Enabled by default, so a rule may contain any PHP expression.
+     * - Set to `false` to parse rules instead, which accepts only Faker formatters, literal arguments
+     *   and allow-listed functions, and rejects everything else.
+     *
+     * @api
+     *
+     * @var string
+     */
+    public const IS_DATA_BUILDER_RULE_EVAL_ENABLED = 'TESTIFY:IS_DATA_BUILDER_RULE_EVAL_ENABLED';
+
+    /**
+     * Specification:
+     * - Defines the list of PHP functions that are allowed in parsed data builder rules.
+     * - Only applies while rules are parsed, so it has no effect when rule `eval()` is enabled.
+     * - Defaults to `strtotime`.
+     *
+     * @api
+     *
+     * @var string
+     */
+    public const DATA_BUILDER_ALLOWED_RULE_FUNCTIONS = 'TESTIFY:DATA_BUILDER_ALLOWED_RULE_FUNCTIONS';
 }

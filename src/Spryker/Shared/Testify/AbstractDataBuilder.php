@@ -8,9 +8,11 @@
 namespace Spryker\Shared\Testify;
 
 use Faker\Factory;
+use InvalidArgumentException;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Shared\Testify\Exception\DependencyNotDefinedException;
 use Spryker\Shared\Testify\Exception\FieldNotDefinedException;
+use Spryker\Shared\Testify\Exception\InvalidRuleException;
 use Spryker\Shared\Testify\Exception\RuleNotDefinedException;
 
 abstract class AbstractDataBuilder
@@ -19,6 +21,8 @@ abstract class AbstractDataBuilder
      * @var \Faker\Generator
      */
     protected static $faker;
+
+    protected ?TestifyConfig $sharedConfig = null;
 
     /**
      * @var array<string, string>
@@ -246,25 +250,364 @@ abstract class AbstractDataBuilder
         }
     }
 
-    /**
-     * @SuppressWarning(PHPMD.EvalSniff)
-     *
-     * @param string $rule
-     *
-     * @return string|bool
-     */
-    protected function generateFromRule($rule)
+    protected function generateFromRule(string $rule): mixed
     {
         if (strpos($rule, '=') === 0) {
             return substr($rule, 1);
         }
 
+        if ($this->getSharedConfig()->isDataBuilderRuleEvalEnabled()) {
+            return $this->generateFromRuleWithEval($rule);
+        }
+
+        if (strpos($rule, '(') === false) {
+            return call_user_func($this->resolveFakerFormatter($rule));
+        }
+
+        return $this->evaluateRule($rule);
+    }
+
+    protected function getSharedConfig(): TestifyConfig
+    {
+        if ($this->sharedConfig === null) {
+            $this->sharedConfig = new TestifyConfig();
+        }
+
+        return $this->sharedConfig;
+    }
+
+    /**
+     * @SuppressWarnings("PHPMD.EvalExpression")
+     */
+    protected function generateFromRuleWithEval(string $rule): mixed
+    {
         // @codingStandardsIgnoreStart
         if (strpos($rule, '(') !== false) {
             return eval("return static::\$faker->$rule;");
         }
         return eval("return static::\$faker->$rule();");
         // @codingStandardsIgnoreEnd
+    }
+
+    /**
+     * @throws \Spryker\Shared\Testify\Exception\InvalidRuleException
+     *
+     * @return mixed
+     */
+    protected function evaluateRule(string $rule)
+    {
+        $tokens = $this->tokenizeRule($rule);
+        $position = 0;
+
+        $value = $this->evaluateFakerCallChain($tokens, $position);
+
+        if ($position < count($tokens)) {
+            throw new InvalidRuleException(sprintf('Unexpected trailing input in data builder rule "%s"', $rule));
+        }
+
+        return $value;
+    }
+
+    /**
+     * @return list<array<int, int|string>|string>
+     */
+    protected function tokenizeRule(string $rule): array
+    {
+        $tokens = [];
+        foreach (token_get_all(sprintf('<?php %s', $rule)) as $token) {
+            if (is_array($token) && in_array($token[0], [T_OPEN_TAG, T_WHITESPACE], true)) {
+                continue;
+            }
+
+            $tokens[] = $token;
+        }
+
+        return $tokens;
+    }
+
+    /**
+     * @param list<array<int, int|string>|string> $tokens
+     *
+     * @return mixed
+     */
+    protected function evaluateFakerCallChain(array $tokens, int &$position)
+    {
+        $subject = null;
+        $isChainRoot = true;
+
+        while (true) {
+            $methodName = $this->readIdentifier($tokens, $position);
+            $arguments = $this->readArgumentList($tokens, $position);
+
+            $callable = $isChainRoot
+                ? $this->resolveFakerFormatter($methodName)
+                : $this->resolveChainSegmentCallable($subject, $methodName);
+
+            $subject = call_user_func_array($callable, $arguments);
+            $isChainRoot = false;
+
+            $token = $tokens[$position] ?? null;
+
+            if (!is_array($token) || $token[0] !== T_OBJECT_OPERATOR) {
+                break;
+            }
+
+            $position++;
+        }
+
+        return $subject;
+    }
+
+    protected function resolveFakerFormatter(string $name): callable
+    {
+        try {
+            return static::$faker->getFormatter($name);
+        } catch (InvalidArgumentException $invalidArgumentException) {
+            throw new InvalidRuleException(
+                sprintf('Formatter "%s" is not available in data builder rules', $name),
+                0,
+                $invalidArgumentException,
+            );
+        }
+    }
+
+    protected function resolveChainSegmentCallable(mixed $subject, string $name): callable
+    {
+        if (!is_object($subject) || !is_callable([$subject, $name])) {
+            throw new InvalidRuleException(
+                sprintf('Method "%s" cannot be called on the result of the previous rule segment', $name),
+            );
+        }
+
+        return [$subject, $name];
+    }
+
+    /**
+     * @param list<array<int, int|string>|string> $tokens
+     *
+     * @throws \Spryker\Shared\Testify\Exception\InvalidRuleException
+     */
+    protected function readIdentifier(array $tokens, int &$position): string
+    {
+        $token = $tokens[$position] ?? null;
+
+        if (!is_array($token) || $token[0] !== T_STRING) {
+            throw new InvalidRuleException('Expected an identifier in data builder rule');
+        }
+
+        $position++;
+
+        return (string)$token[1];
+    }
+
+    /**
+     * @param list<array<int, int|string>|string> $tokens
+     *
+     * @throws \Spryker\Shared\Testify\Exception\InvalidRuleException
+     *
+     * @return array<mixed>
+     */
+    protected function readArgumentList(array $tokens, int &$position): array
+    {
+        $this->consumeCharacter($tokens, $position, '(');
+
+        $arguments = $this->readDelimitedList($tokens, $position, ')');
+
+        if (!array_is_list($arguments)) {
+            throw new InvalidRuleException('Keyed arguments are not supported in data builder rules');
+        }
+
+        return $arguments;
+    }
+
+    /**
+     * @param list<array<int, int|string>|string> $tokens
+     *
+     * @return array<mixed>
+     */
+    protected function readDelimitedList(array $tokens, int &$position, string $closingCharacter): array
+    {
+        $values = [];
+
+        if (($tokens[$position] ?? null) === $closingCharacter) {
+            $position++;
+
+            return $values;
+        }
+
+        while (true) {
+            $this->readArrayElement($tokens, $position, $values);
+
+            if (($tokens[$position] ?? null) === ',') {
+                $position++;
+
+                if (($tokens[$position] ?? null) === $closingCharacter) {
+                    $position++;
+
+                    break;
+                }
+
+                continue;
+            }
+
+            $this->consumeCharacter($tokens, $position, $closingCharacter);
+
+            break;
+        }
+
+        return $values;
+    }
+
+    /**
+     * @param list<array<int, int|string>|string> $tokens
+     *
+     * @throws \Spryker\Shared\Testify\Exception\InvalidRuleException
+     *
+     * @return mixed
+     */
+    protected function readArgument(array $tokens, int &$position)
+    {
+        $token = $tokens[$position] ?? null;
+
+        if ($token === '-') {
+            $position++;
+
+            return -$this->readNumber($tokens, $position);
+        }
+
+        if (is_array($token) && $token[0] === T_CONSTANT_ENCAPSED_STRING) {
+            $position++;
+
+            return $this->decodeStringLiteral((string)$token[1]);
+        }
+
+        if (is_array($token) && ($token[0] === T_LNUMBER || $token[0] === T_DNUMBER)) {
+            return $this->readNumber($tokens, $position);
+        }
+
+        if (is_array($token) && $token[0] === T_ARRAY) {
+            $position++;
+            $this->consumeCharacter($tokens, $position, '(');
+
+            return $this->readDelimitedList($tokens, $position, ')');
+        }
+
+        if ($token === '[') {
+            $position++;
+
+            return $this->readDelimitedList($tokens, $position, ']');
+        }
+
+        if (is_array($token) && $token[0] === T_STRING) {
+            return $this->readKeywordOrFunctionCall($tokens, $position);
+        }
+
+        throw new InvalidRuleException('Unexpected token in data builder rule argument');
+    }
+
+    /**
+     * @param list<array<int, int|string>|string> $tokens
+     *
+     * @throws \Spryker\Shared\Testify\Exception\InvalidRuleException
+     *
+     * @return mixed
+     */
+    protected function readKeywordOrFunctionCall(array $tokens, int &$position)
+    {
+        $name = $this->readIdentifier($tokens, $position);
+        $lowerCasedName = strtolower($name);
+
+        if ($lowerCasedName === 'true') {
+            return true;
+        }
+
+        if ($lowerCasedName === 'false') {
+            return false;
+        }
+
+        if ($lowerCasedName === 'null') {
+            return null;
+        }
+
+        if (!in_array($lowerCasedName, $this->getSharedConfig()->getDataBuilderAllowedRuleFunctions(), true) || !is_callable($lowerCasedName)) {
+            throw new InvalidRuleException(sprintf('Function "%s" is not allowed in data builder rules', $name));
+        }
+
+        $arguments = $this->readArgumentList($tokens, $position);
+
+        return call_user_func_array($lowerCasedName, $arguments);
+    }
+
+    /**
+     * @param list<array<int, int|string>|string> $tokens
+     * @param array<mixed> $values
+     *
+     * @throws \Spryker\Shared\Testify\Exception\InvalidRuleException
+     */
+    protected function readArrayElement(array $tokens, int &$position, array &$values): void
+    {
+        $value = $this->readArgument($tokens, $position);
+
+        $token = $tokens[$position] ?? null;
+
+        if (!is_array($token) || $token[0] !== T_DOUBLE_ARROW) {
+            $values[] = $value;
+
+            return;
+        }
+
+        if (!is_int($value) && !is_string($value)) {
+            throw new InvalidRuleException('Array key in a data builder rule must be an integer or a string');
+        }
+
+        $position++;
+        $values[$value] = $this->readArgument($tokens, $position);
+    }
+
+    /**
+     * @param list<array<int, int|string>|string> $tokens
+     *
+     * @throws \Spryker\Shared\Testify\Exception\InvalidRuleException
+     *
+     * @return float|int
+     */
+    protected function readNumber(array $tokens, int &$position)
+    {
+        $token = $tokens[$position] ?? null;
+
+        if (!is_array($token) || ($token[0] !== T_LNUMBER && $token[0] !== T_DNUMBER)) {
+            throw new InvalidRuleException('Expected a number in data builder rule');
+        }
+
+        $position++;
+
+        return $token[0] === T_LNUMBER ? (int)$token[1] : (float)$token[1];
+    }
+
+    protected function decodeStringLiteral(string $literal): string
+    {
+        $quoteCharacter = $literal[0];
+        $body = substr($literal, 1, -1);
+
+        if ($quoteCharacter === "'") {
+            return str_replace(['\\\\', "\\'"], ['\\', "'"], $body);
+        }
+
+        return stripcslashes($body);
+    }
+
+    /**
+     * @param list<array<int, int|string>|string> $tokens
+     *
+     * @throws \Spryker\Shared\Testify\Exception\InvalidRuleException
+     */
+    protected function consumeCharacter(array $tokens, int &$position, string $character): void
+    {
+        if (($tokens[$position] ?? null) !== $character) {
+            throw new InvalidRuleException(sprintf('Expected "%s" in data builder rule', $character));
+        }
+
+        $position++;
     }
 
     /**

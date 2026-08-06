@@ -4,3 +4,16 @@ paths:
     data: ../../../_data
     support: _support
     output: ../../../_output
+
+coverage:
+    enabled: true
+    remote: false
+    whitelist: { include: ['../../../../src/*'] }
+
+suites:
+    DataBuilder:
+        path: DataBuilder
+        actor: TestifySharedTester
+        modules:
+            enabled:
+                - Asserts
