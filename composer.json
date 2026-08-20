@@ -18,9 +18,12 @@
         "spryker/symfony": "^3.0.0"
     },
     "require-dev": {
+        "spryker/category-storage": "*",
         "spryker/code-sniffer": "*",
+        "spryker/company-role": "*",
         "spryker/console": "*",
         "spryker/event-dispatcher": "*",
+        "spryker/glossary-storage": "*",
         "spryker/glue-application": "*",
         "spryker/glue-backend-api-application": "*",
         "spryker/glue-json-api-convention": "*",
@@ -28,9 +31,13 @@
         "spryker/http": "*",
         "spryker/json-path": "^1.0.0",
         "spryker/json-schema": "^1.0.0",
+        "spryker/product-storage": "*",
         "spryker/propel-orm": "*",
         "spryker/router": "*",
         "spryker/silex": "*",
+        "spryker/storage": "*",
+        "spryker/store": "*",
+        "spryker/store-storage": "*",
         "spryker/twig": "^3.0.0",
         "symfony/dom-crawler": "*",
         "symfony/framework-bundle": "*"
