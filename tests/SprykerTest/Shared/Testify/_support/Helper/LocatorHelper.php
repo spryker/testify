@@ -67,7 +67,6 @@ class LocatorHelper extends Module
     public function addToLocatorCache(string $cacheKey, $classInstance): void
     {
         $bundleProxyInstanceCachePropertyReflection = new ReflectionProperty(BundleProxy::class, 'instanceCache');
-        $bundleProxyInstanceCachePropertyReflection->setAccessible(true);
         $instanceCache = $bundleProxyInstanceCachePropertyReflection->getValue();
         $instanceCache[$cacheKey] = [
             'instance' => $classInstance,
@@ -76,7 +75,6 @@ class LocatorHelper extends Module
         $bundleProxyInstanceCachePropertyReflection->setValue(null, $instanceCache);
 
         $bundleProxyIsInstanceCacheEnabledPropertyReflection = new ReflectionProperty(BundleProxy::class, 'isInstanceCacheEnabled');
-        $bundleProxyIsInstanceCacheEnabledPropertyReflection->setAccessible(true);
         $bundleProxyIsInstanceCacheEnabledPropertyReflection->setValue(null, true);
     }
 
@@ -84,7 +82,6 @@ class LocatorHelper extends Module
     {
         $reflection = new ReflectionClass(Config::class);
         $reflectionProperty = $reflection->getProperty('config');
-        $reflectionProperty->setAccessible(true);
 
         return $reflectionProperty;
     }
@@ -133,7 +130,6 @@ class LocatorHelper extends Module
     {
         $reflection = new ReflectionClass(AbstractLocatorLocator::class);
         $instanceProperty = $reflection->getProperty('instance');
-        $instanceProperty->setAccessible(true);
         $instanceProperty->setValue(null, null);
     }
 
@@ -141,7 +137,6 @@ class LocatorHelper extends Module
     {
         $reflection = new ReflectionClass(BundleDependencyProviderResolverAwareTrait::class);
         $instanceProperty = $reflection->getProperty('containers');
-        $instanceProperty->setAccessible(true);
         $instanceProperty->setValue(null, null);
     }
 
@@ -151,7 +146,6 @@ class LocatorHelper extends Module
 
         if ($abstractClassResolverReflection->hasProperty('cache')) {
             $instanceProperty = $abstractClassResolverReflection->getProperty('cache');
-            $instanceProperty->setAccessible(true);
             $instanceProperty->setValue(null, []);
         }
 
@@ -159,7 +153,6 @@ class LocatorHelper extends Module
 
         if ($bundleProxyReflection->hasProperty('instanceCache')) {
             $instanceProperty = $bundleProxyReflection->getProperty('instanceCache');
-            $instanceProperty->setAccessible(true);
             $instanceProperty->setValue(null, []);
         }
     }

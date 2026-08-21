@@ -69,7 +69,6 @@ class ConfigHelper extends Module
     {
         $reflection = new ReflectionClass(Config::class);
         $reflectionProperty = $reflection->getProperty('config');
-        $reflectionProperty->setAccessible(true);
 
         return $reflectionProperty;
     }

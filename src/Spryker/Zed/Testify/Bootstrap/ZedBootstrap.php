@@ -85,7 +85,6 @@ class ZedBootstrap
 
         foreach (['globalServices', 'globalServiceIdentifier', 'globalServiceIdentifier', 'aliases'] as $property) {
             $reflectionProperty = $reflectionClass->getProperty($property);
-            $reflectionProperty->setAccessible(true);
             $reflectionProperty->setValue([]);
         }
 

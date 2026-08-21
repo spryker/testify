@@ -204,7 +204,6 @@ class SystemUnderTestBootstrap
         }
 
         $refProperty = $parent->getProperty('instance');
-        $refProperty->setAccessible(true);
         $refProperty->setValue(null);
     }
 }

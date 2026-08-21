@@ -47,7 +47,6 @@ class FixturesRunner extends Codecept
     {
         $suiteReflection = new ReflectionClass($suite);
         $suiteTestProperty = $suiteReflection->getProperty('tests');
-        $suiteTestProperty->setAccessible(true);
 
         return count($suiteTestProperty->getValue($suite));
     }

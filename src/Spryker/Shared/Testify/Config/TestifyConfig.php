@@ -30,7 +30,6 @@ class TestifyConfig implements TestifyConfigInterface
     {
         $reflection = new ReflectionClass(Config::class);
         $reflectionProperty = $reflection->getProperty('config');
-        $reflectionProperty->setAccessible(true);
 
         return $reflectionProperty;
     }

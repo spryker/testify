@@ -44,7 +44,6 @@ class DependencyHelper extends Module
         foreach ($factoriesArray as $factory) {
             $factory = new ReflectionClass($factory);
             $containerProperty = $factory->getProperty('containers');
-            $containerProperty->setAccessible(true);
             $containerProperty->setValue(null, []);
         }
     }

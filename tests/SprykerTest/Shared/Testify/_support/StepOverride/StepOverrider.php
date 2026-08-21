@@ -45,7 +45,6 @@ class StepOverrider extends Scenario
         // TODO [E2E] Consider other way to override steps
         $scenarioReflection = new ReflectionObject($scenario);
         $testProperty = $scenarioReflection->getProperty('test');
-        $testProperty->setAccessible(true);
         parent::__construct($testProperty->getValue($scenario));
     }
 
@@ -94,7 +93,7 @@ class StepOverrider extends Scenario
     /**
      * @inheritDoc
      */
-    public function current(?string $key)
+    public function current(?string $key = null)
     {
         return $this->scenario->current($key);
     }

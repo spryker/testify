@@ -32,7 +32,6 @@ trait StaticVariablesHelper
         }
 
         $propertyReflection = $classReflection->getProperty($propertyName);
-        $propertyReflection->setAccessible(true);
 
         $this->staticDefinitions[] = [
             'className' => $className,
@@ -48,7 +47,6 @@ trait StaticVariablesHelper
         foreach ($this->staticDefinitions as $staticDefinition) {
             $classReflection = new ReflectionClass($staticDefinition['className']);
             $propertyReflection = $classReflection->getProperty($staticDefinition['propertyName']);
-            $propertyReflection->setAccessible(true);
             $propertyReflection->setValue(null, $staticDefinition['value']);
         }
     }

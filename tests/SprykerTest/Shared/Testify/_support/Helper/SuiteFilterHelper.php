@@ -220,7 +220,6 @@ class SuiteFilterHelper extends Extension
     {
         $refClass = new ReflectionClass($testSuite);
         $reflectionProperty = $refClass->getProperty('tests');
-        $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($testSuite, $tests);
     }
 
