@@ -25,4 +25,32 @@ class TestifyFacade extends AbstractFacade implements TestifyFacadeInterface
     {
         return $this->getFactory()->createOutputCleaner()->cleanup();
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param string|null $templatePath
+     *
+     * @return string
+     */
+    public function buildSqliteZedTemplate(?string $templatePath = null): string
+    {
+        return $this->getFactory()->createSqliteZedTemplateBuilder()->build($templatePath);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param string|null $templatePath
+     *
+     * @return string
+     */
+    public function rebuildSqliteZedTemplate(?string $templatePath = null): string
+    {
+        return $this->getFactory()->createSqliteZedTemplateBuilder()->rebuild($templatePath);
+    }
 }

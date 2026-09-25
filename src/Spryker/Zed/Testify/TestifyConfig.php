@@ -32,4 +32,37 @@ class TestifyConfig extends AbstractBundleConfig
 
         return $directories;
     }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getApplicationRootDir(): string
+    {
+        return APPLICATION_ROOT_DIR;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getSqliteZedTemplatePath(): string
+    {
+        return APPLICATION_ROOT_DIR . '/data/spike-zed.sqlite';
+    }
+
+    /**
+     * The propel diff for the SQLite engine is generated into its own directory, so it never
+     * collides with the migrations of the engine the project actually deploys on.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getSqliteZedTemplateMigrationDirectory(): string
+    {
+        return APPLICATION_ROOT_DIR . '/src/Orm/Propel/Migration_sqlite';
+    }
 }
