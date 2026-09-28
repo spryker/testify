@@ -65,8 +65,9 @@ class RunFilteredCommand extends Run implements CustomCommandInterface
     /**
      * Mirrors {@see Run::runIncludedSuites()} but (1) pre-selects the app list
      * once, at the top-level call, via {@see AppPathSelector}, and (2) prints
-     * the magenta per-app header only when the app has at least one runnable
-     * suite — so filtered-out apps produce no output at all.
+     * the magenta per-app header, and a per-app elapsed-time line once its suites
+     * finish, only when the app has at least one runnable suite — so filtered-out
+     * apps produce no output at all.
      *
      * @param array<string> $suites
      * @param array<string, array<string>> $filterAppSuites
@@ -97,6 +98,10 @@ class RunFilteredCommand extends Run implements CustomCommandInterface
                 Configuration::append(['groups' => $groups]);
             }
 
+            if (isset($defaultConfig['settings']['error_level'])) {
+                Configuration::append(['settings' => ['error_level' => $defaultConfig['settings']['error_level']]]);
+            }
+
             $appSuites = Configuration::suites();
 
             if ($filterSuitesByWildcard !== []) {
@@ -112,7 +117,13 @@ class RunFilteredCommand extends Run implements CustomCommandInterface
                     "\n<fg=white;bg=magenta>\n[{$namespace}]: tests from {$currentDir}\n</fg=white;bg=magenta>",
                 );
 
+                $startedAt = microtime(true);
                 $this->executed += $this->runSuites($appSuites, $this->options['skip']);
+                $this->output->writeln(sprintf(
+                    "\n<fg=cyan>[%s] finished in %.2fs</>",
+                    $namespace,
+                    microtime(true) - $startedAt,
+                ));
             }
 
             if (!empty($config['include'])) {
