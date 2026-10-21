@@ -24,10 +24,9 @@ use Symfony\Component\Console\Input\InputOption;
  * this only avoids booting suites that would run nothing, and gates the
  * per-app header so the log contains only apps that actually ran.
  *
- * Replaces the 9 root configs + SuiteFilterHelper: e.g.
- * `codecept run:filtered -g Glue` ~ codeception.api.yml;
- * `codecept run:filtered -x Presentation -x Glue` ~ codeception.functional.yml;
- * `codecept run:filtered --include 'src/Spryker/Cart/*'` for one module.
+ * Collapses the 9 former root configs onto the single root codeception.yml: the
+ * api leg is `-g Glue`, the functional core leg `-x Presentation -x Glue`, and a
+ * single module `--include 'src/Spryker/Cart/*'`. See tests/_consolidation/README.md.
  */
 class RunFilteredCommand extends Run implements CustomCommandInterface
 {
