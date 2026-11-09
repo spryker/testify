@@ -239,7 +239,7 @@ class ConfigHelper extends Module
     {
         $sharedConfigClassName = $this->resolveClassName(static::SHARED_CONFIG_CLASS_NAME_PATTERN, $moduleName);
 
-        if (!class_exists($sharedConfigClassName)) {
+        if (!class_exists($sharedConfigClassName) || !is_subclass_of($sharedConfigClassName, AbstractSharedConfig::class)) {
             return null;
         }
 
