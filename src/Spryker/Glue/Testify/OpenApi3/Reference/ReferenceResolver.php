@@ -32,7 +32,7 @@ class ReferenceResolver implements ReferenceResolverInterface
         /** @var \Spryker\Glue\Testify\OpenApi3\SchemaFieldInterface $pointer */
         $pointer = $this->containers[$file] ?? new Any();
 
-        while (count($path) > 0) {
+        while ($path !== []) {
             $segment = array_pop($path);
 
             if ($pointer instanceof AbstractObject && isset($pointer->{$segment})) {
